@@ -1,0 +1,16 @@
+<modification>
+	<id>Show Filters from Products not Categories in Filter Module</id>
+	<version>1.0</version>
+	<vqmver>2.4.1</vqmver>
+	<author>www.best-byte.com</author>	
+<file name="catalog/model/catalog/category.php">	
+	<operation>
+		<search position="replace"><![CDATA[
+    $query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
+    ]]></search>
+		<add><![CDATA[
+    $query = $this->db->query("SELECT pf.filter_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) LEFT JOIN " . DB_PREFIX . "product_filter pf ON (p.product_id = pf.product_id) WHERE p2c.category_id = '" . (int)$category_id . "' AND p.status='1'");
+    ]]></add>
+	</operation>	
+</file>	
+</modification>

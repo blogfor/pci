@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+
+	<id>Shop By Color</id>
+	<version>1.0.0</version>
+	<vqmver>2.4.0</vqmver>
+	<author><![CDATA[<a onClick="window.open('http://www.opencart.com/index.php?route=extension/extension&filter_username=frymi');" title="View all OpenCart extension by frymi">frymi</a>]]></author>
+
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+      <search position="before"><![CDATA[<?php foreach ($styles as $style) { ?>]]></search>
+      <add><![CDATA[<link rel="stylesheet" type="text/css" href="catalog/view/theme/<?php echo $this->config->get('config_template'); ?>/stylesheet/shopbycolor.css" />]]></add>
+    </operation>
+	</file>
+
+</modification>

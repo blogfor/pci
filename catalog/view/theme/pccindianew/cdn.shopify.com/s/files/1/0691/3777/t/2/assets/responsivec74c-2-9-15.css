@@ -1,0 +1,605 @@
+/***********************************************************
+
+1. CSS RESET
+
+2. VARIABLES
+2.1 GRADIENTS
+2.2 CSS3 TRANSITIONS
+
+3. GLOBAL THEME STYLES
+
+4. TYPOGRAPHY
+4.1 HEADINGS
+4.2 PARAGRAPHS & LISTS
+4.3 LINKS
+4.4 PRODUCT ATTRIBUTES (name, description, price)
+4.5 RTE
+
+5. FORMS & COMPONENTS
+5.1 FORMS
+5.2 ALERTS
+5.3 BUTTONS
+
+6. GLOBAL PAGE LAYOUT
+
+7. SIDEBAR CONFIGURATION
+
+8. MAIN PAGE
+8.1 HEADER
+8.2 MEGAMENU
+8.3 NIVOSLIDER
+8.4 SHOWCASE
+8.5 MAIN PRODUCT LISTING
+8.6 FOOTER
+
+9. COLLECTION PAGES
+9.1 PAGES CONTENT
+9.2 BREADCRUMBS
+9.3 COLLECTION LISTING
+9.4 PAGINATION
+
+10. SIDEBAR WIDGETS
+10.1 LINKS LIST
+10.2 SIDEBAR PRODUCT LISTING
+
+11. SEARCH RESULTS PAGE
+
+12. PRODUCT PAGE
+12.1 PRODUCT IMAGES
+12.2 PRODUCT INFO
+12.3 PRODUCT PAGINATION
+12.4 RELATED PRODUCTS
+
+13. BLOG
+13.1 POSTS LISTING
+13.2 SINGLE POST
+
+14. CUSTOMER PAGES
+14.1 LOG IN
+14.2 ACCOUNT
+14.3 ADDRESSES
+14.4 ORDERS
+
+15. CART PAGE
+15.1 CART PRODUCTS
+15.2 GUEST CHECKOUT
+
+16. CONTACTS PAGE
+
+***********************************************************/
+
+
+
+/***************************************************************************
+1700px < 1920px
+***************************************************************************/
+
+@media (min-width: 1700px) and (max-width: 1920px) {
+
+/* 8.4 SHOWCASE */
+.custom_showcase__big a div {padding: 0 50px;}
+
+
+
+}
+
+
+
+/***************************************************************************
+1450px < 1700px
+***************************************************************************/
+
+@media (min-width: 1450px) and (max-width: 1700px) {
+
+/* 8.4 SHOWCASE */
+.custom_showcase__big a div {padding: 0 50px;}
+
+.custom_showcase__small a div {top: 44%;}
+
+
+
+/* HOMEPAGE CAROUSEL */
+.index-scope .bx-prev {left: -70px;}
+.index-scope .bx-next {right: -70px;}
+
+
+
+}
+
+
+
+/***************************************************************************
+1200px < 1450px
+***************************************************************************/
+
+@media (min-width: 1200px) and (max-width: 1450px) {
+
+/* 8.4 SHOWCASE */
+#showcase {max-width: 1170px;}
+
+.custom_showcase__big a div {padding: 0 30px;}
+.custom_showcase__big h3 {font-size: 55px;}
+
+.custom_showcase__small a div {top: 68%;}
+.custom_showcase__small h3 {padding: 0;font-size: 35px;}
+.custom_showcase__small p {display: none;}
+.custom_showcase__small span {padding: 5px 0 0 0;}
+
+
+
+/* HOMEPAGE CAROUSEL */
+.index-scope .bx-prev {margin: 0;left: 0;top: -90px !important;}
+.index-scope .bx-next {margin: 0;right: 0;top: -90px !important;}
+
+
+
+}
+
+
+
+/***************************************************************************
+< 1200px
+***************************************************************************/
+
+@media (max-width: 1199px) {
+
+/* 5.3 BUTTONS */
+.btn {padding: 10px 15px !important;font-size: 14px !important;}
+
+
+
+/* 3. GLOBAL THEME STYLES */
+/* cookies policy message */
+.cookies_container {text-align: center;}
+.cookies_container p {display: block;font-size: 15px;}
+.cookies_container .cookie_btn {margin: 10px 0;font-size: 15px;}
+
+
+/* 8.1 HEADER */
+.btn.checkout {padding: 12px 19px !important;}
+
+.header_search {float: right;margin: 9px 20px 0 0;position: relative;left: auto;top: auto;}
+
+
+
+/* 8.2 MEGAMENU */
+.sf-menu .submenu {padding: 10px 15px 15px 15px;font-size: 14px;}
+
+.submenu__2 ul {padding: 5px 0 0 0;}
+.submenu__2 li {padding: 5px 0;}
+.submenu__2 li a {font-size: 12px;}
+
+.submenu__2 .row__2 {margin-top: 15px;}
+
+.submenu__2 .row__2 a div {padding: 15px 20px 0 20px;}
+.submenu__2 .row__2 a span {font-size: 35px;line-height: 1.2em;}
+
+
+
+/* 8.3 NIVOSLIDER */
+
+/* 8.4 SHOWCASE */
+#showcase {max-width: 970px;}
+
+.custom_showcase__big a div {padding: 0 30px;}
+.custom_showcase__big h3 {font-size: 35px;}
+
+.custom_showcase__small a div {top: 65%;}
+.custom_showcase__small h3 {font-size: 35px;}
+.custom_showcase__small p {display: none;}
+.custom_showcase__small span {padding: 5px 0 0 0;}
+
+
+
+/* HOMEPAGE CAROUSEL */
+.index-scope .bx-prev {margin: 0;left: 0;top: -90px !important;}
+.index-scope .bx-next {margin: 0;right: 0;top: -90px !important;}
+
+
+
+/* HOMEPAGE BLOG */
+.homepage_blog__title a {font-size: 20px;line-height: 1.5em;}
+
+
+
+/* 8.5 MAIN PRODUCT LISTING */
+
+
+
+/* 8.6 FOOTER */
+.fb-like-box,
+.fb-like-box > span,
+.fb-like-box > span > iframe {width: 300px !important;height: 390px !important;}
+
+#instafeed a {width: 85px;height: 85px;}
+
+
+
+/* HOMEPAGE CAROUSEL */
+.index-scope .bx-wrapper {}
+.homepage_carousel .product {width: 250px !important;}
+
+
+
+/* 10.2 SIDEBAR PRODUCT LISTING */
+.product_listing_sidebar .product {text-align: center;}
+.product_listing_sidebar .product_img {width: 100%;float: none;}
+.product_listing_sidebar .product_info {margin: 10px 0 0 0;}
+
+}
+
+
+
+/***************************************************************************
+                                < 992px
+***************************************************************************/
+
+@media (max-width: 992px) {
+
+.cart_popup {top: 0 !important;}
+
+
+
+/* 4.1 HEADINGS */
+.page_heading {font-size: 20px;}
+
+
+
+/* 8.1 HEADER */
+.clearblock {clear: both;}
+
+.header_cart {float: right;padding: 18px 0 0 0;}
+.header_search {float: left;/*margin: 15px 0 0 0;*/margin: 5px 0 0 0;}
+
+#logo {/*padding: 34px 0 50px 0;*/padding: 30px 0 10px 0;}
+
+
+
+/* 8.2 MEGAMENU */
+#megamenu.isStuck {position: relative !important;left: auto;right: auto;
+-webkit-box-shadow: none;
+        box-shadow: none;
+}
+.pseudoStickyBlock {display: none !important;}
+
+
+
+.megamenu_mobile {background: #ffffff;position: relative;
+-webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
+        box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
+}
+
+.megamenu_mobile h2 {overflow: hidden;margin: 0;padding: 15px 45px 15px 15px;font-size: 20px;white-space: nowrap;text-overflow: ellipsis;cursor: pointer;position: relative;}
+.megamenu_mobile h2 i {position: absolute;right: 15px;top: 13px;}
+.megamenu_mobile h2 i:before {content: '\f0fe';font: 20px 'FontAwesome';color: #777777;}
+.megamenu_mobile h2.active i:before {content: '\f146';}
+
+.megamenu_mobile > ul {width: 100%;}
+
+.megamenu_mobile li {position: relative;}
+
+
+
+.submenu__1 {padding: 15px;background: #ffffff;position: absolute;
+display: none;
+
+-webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
+        box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
+}
+.submenu__1 > li ~ li {padding: 5px 0 0 0;}
+.submenu__1 > li > a {display: block;font-size: 16px;text-transform: uppercase;}
+.submenu__1 > li > a > i {float: right;}
+.submenu__1 > li > a > i:before {content: '\f0fe';font: 16px 'FontAwesome';color: #777777;}
+.submenu__1 > li > a.active > i:before {content: '\f146';}
+
+
+
+.submenu__2 {margin: 10px 0;padding: 0 15px;background: none;background: #ffffff;
+display: none;
+
+-webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+        box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+}
+.submenu__2 > li {padding: 7px 0;}
+.submenu__2 > li > a {display: block;font-size: 14px;text-transform: uppercase;}
+.submenu__2 > li > a > i {float: right;}
+.submenu__2 > li > a > i:before {content: '\f0fe';font: 15px 'FontAwesome';}
+.submenu__2 > li > a.active > i:before {content: '\f146';}
+
+
+
+.submenu__3 {padding: 0 15px;
+display: none;
+}
+
+
+
+/* 8.3 NIVOSLIDER */
+
+/* 8.4 SHOWCASE */
+#showcase {max-width: 750px;margin: 30px auto 0 auto;}
+
+.custom_showcase a:before,
+.custom_showcase a:after {display: none !important;}
+
+.custom_showcase__big a div {margin: -34px 0 0 0;padding: 0 15px;}
+.custom_showcase__big h3 {font-size: 35px;}
+.custom_showcase__big p {display: none;}
+.custom_showcase__big span {padding: 10px 0 0 0;}
+
+.custom_showcase__small a div {padding: 0 15px;top: 65%;}
+.custom_showcase__small h3 {font-size: 25px;}
+.custom_showcase__small p {display: none;}
+.custom_showcase__small span {padding: 5px 0 0 0;font-size: 17px;}
+
+
+
+/* FEATURED COLLECTIONS */
+.homepage_custom__3 h3 {font-size: 25px;}
+
+
+
+/* 8.5 MAIN PRODUCT LISTING */
+
+/* HOMEPAGE CAROUSEL */
+.homepage_carousel .product {width: 260px !important;}
+
+
+
+/* 8.6 FOOTER */
+#bottom h3 {font-size: 15px;}
+
+.fb-like-box,
+.fb-like-box > span,
+.fb-like-box > span > iframe {width: 235px !important;height: 445px !important;}
+
+#instafeed a {width: 60px;height: 60px;}
+
+
+
+/* 10. SIDEBAR WIDGETS */
+.column .widget h3.widget_header {font-size: 20px;}
+
+
+
+/* 12.1 PRODUCT IMAGES */
+.product_image-additioanl {width: 229px !important;}
+
+
+
+/* 12.1 PRODUCT IMAGES */
+.zoomWrapper,
+#elevatezoom_big {width: 262px !important;}
+
+#elevatezoom_gallery a {width: 59px !important;}
+
+.zoomContainer {display: none !important;}
+
+}
+
+
+
+/***************************************************************************
+                                < 767px
+***************************************************************************/
+
+@media (max-width: 767px) {
+
+/* 4.1 HEADINGS */
+.template-index .page_heading {padding: 25px 0 0 0;}
+.template-index .page_heading .wrap-1 {font-size: 50px;}
+.template-index .page_heading .wrap-2 {margin: -5px 0 0 0;font-size: 25px;}
+
+
+
+/* 6. GLOBAL PAGE LAYOUT */
+.container {padding:0 15px;}
+
+.column_left,
+.column_right,
+.column_center,
+#main_content {margin-left: 0 !important;margin-right: 0 !important;}
+
+
+
+/* 8.1 HEADER */
+
+/* 8.2 MEGAMENU */
+
+/* 8.3 NIVOSLIDER */
+
+/* 8.4 SHOWCASE */
+#showcase {margin: 30px 15px 0 15px;}
+
+
+
+/* BG VIDEO */
+.homepage_custom__2 {margin: 30px 0 0 0;}
+.homepage_custom__2 .bg_video {padding: 30px 0 30px 0;}
+.homepage_custom__2 h3 {font-size: 40px;}
+.homepage_custom__2 h4 {font-size: 30px;}
+
+
+
+/* FEATURED COLLECTIONS */
+.homepage_custom__3 {}
+.homepage_custom__3 .item {overflow: hidden;margin: 30px 0 0 0;text-align: left;}
+.homepage_custom__3 img {width: 120px;float: left;margin: 0 15px 0 0;}
+
+.homepage_custom__3 h3 {margin: -6px 0 0 0;font-size: 20px;}
+.homepage_custom__3 p {}
+.homepage_custom__3 .btn {margin: 10px 0 0 0;}
+
+
+
+/* PARALLAX BLOCKS */
+.parallax_box {margin: 30px 0 0 0;padding: 30px 0 30px 0;}
+.parallax_box h3 {font-size: 40px;}
+.parallax_box h4 {font-size: 30px;}
+.parallax_box p {}
+
+
+
+/* 8.5 MAIN PRODUCT LISTING */
+.product_listing_main .product {margin: 30px 0 0 0;text-align: left;}
+.product_listing_main .product > div {overflow: hidden;}
+
+.product_listing_main .product_img {width: 120px;float: left;}
+.product_listing_main .product_img span.product_badge {display: none;}
+
+.product_listing_main .product_info {margin: 0 0 0 135px;}
+
+.product_listing_main .product_name {margin: 10px 0 0 0;}
+
+.product_listing_main .product_price {margin: -5px 0 0 0;padding: 0;}
+.product_listing_main .product_price .money {font-size: 20px;}
+.product_listing_main .product_price .compare-at-price {font-size: 15px;}
+
+
+
+/* HOMEPAGE CAROUSEL */
+.index-scope .bx-wrapper {max-width: 767px !important;margin: 0;}
+.index-scope .bx-viewport {height: auto !important;}
+.index-scope .bx-controls a {display: none;}
+
+.homepage_carousel {width: 100% !important;max-width: 767px !important;margin: 0;}
+.homepage_carousel .product {width: 100% !important;float: none;padding: 0;}
+.homepage_carousel .product.bx-clone {display: none;}
+
+
+
+/* MAP */
+.template-index #google_map,
+.template-index #google_map iframe {height: 300px !important;}
+
+.template-index #google_map {margin: 30px 0 0 0;}
+
+
+
+/* 8.6 FOOTER */
+#bottom {padding: 0 0 30px 0;}
+#bottom h3 {padding: 30px 0 15px 0;font-size: 20px;}
+
+.fb-like-box,
+.fb-like-box > span,
+.fb-like-box > span > iframe {width: 290px !important;height: 390px !important;}
+
+#instafeed a {width: 60px;height: 60px;}
+
+
+
+.footer_block h3 {padding: 30px 0 0 0;}
+.footer_block ul {padding: 0;}
+
+.footer_block__4 ul {padding: 10px 0 0 0;}
+
+.copyright {margin: 30px 0 0 0;padding: 30px 0 60px 0;}
+
+
+
+/* 9.2 BREADCRUMBS */
+.breadcrumb {margin: 30px 0 30px 0;}
+
+
+
+/* 10.2 SIDEBAR PRODUCT LISTING */
+.product_listing_sidebar .product {overflow: hidden;text-align: left;}
+.product_listing_sidebar .product_img {width: 100px;float: left;}
+.product_listing_sidebar .product_info {margin: 0 0 0 115px;}
+
+
+
+/* 12.1 PRODUCT IMAGES */
+.zoomWrapper {width: 290px !important;margin: 0 auto;}
+#elevatezoom_big {width: 290px !important;}
+
+.product_images .bx-wrapper {width: 290px !important;margin: 12px auto 0 auto;}
+
+#elevatezoom_gallery a {width: 68px !important;}
+
+
+
+/* 12.2 PRODUCT INFO */
+.product_wrap .product_name {margin: 0;padding: 30px 0 0 0;}
+
+
+
+/* 15. CART PAGE */
+.cart_buttons {text-align: center;}
+.cart_buttons span.or {display: block;margin: 5px 0;}
+
+}
+
+
+
+/***************************************************************************
+                                < 640px
+***************************************************************************/
+
+@media (max-width: 640px) {
+
+
+
+}
+
+
+
+/***************************************************************************
+                                < 480px
+***************************************************************************/
+
+@media (max-width: 480px) {
+
+/* 8.1 HEADER */
+.header_user {float: none;text-align: center;}
+
+.btn.checkout {float: left;}
+
+.header_cart {float: none;text-align: center;}
+.header_cart a {display: inline-block;}
+
+.header_search {width: 100%;float: none;}
+
+#logo b {font-size: 80px;}
+#logo b.offset_left {margin: 0 0 0 25px;}
+#logo span {margin: 5px 0 0 0;letter-spacing: 0;}
+
+
+
+/* 8.4 SHOWCASE */
+.custom_showcase__small h3 {font-size: 20px;}
+
+
+
+/* 8.5 MAIN PRODUCT LISTING */
+.product_listing_main .product_img {width: 100px;}
+.product_listing_main .product_info {margin: 0 0 0 115px;}
+.product_listing_main .product_desc {display: none;}
+
+
+
+/* 12.1 PRODUCT IMAGES */
+.product_wrap .product_image {width: 290px;}
+.product_image-additioanl {width: 306px !important;}
+.product_wrap #bx-pager a {width: 87px;margin-right: 15px;}
+
+
+
+/* 14.2 ACCOUNT */
+.customer_name .divider {display: none;}
+.customer_name .email {display: block;}
+.customer_name a {float: none;}
+
+}
+
+
+
+/***************************************************************************
+                                < 340px
+***************************************************************************/
+
+@media (max-width: 340px) {
+
+
+
+}

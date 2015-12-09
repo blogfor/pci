@@ -1,0 +1,4 @@
+.sbc {}
+.sbc a {border:1px solid #ccc; border-radius:7px; -moz-border-radius:7px; -webkit-border-radius:7px; box-shadow:inset 0px 0px 5px #cccccc; -moz-box-shadow:inset 0px 0px 5px #cccccc; -webkit-box-shadow:inset 0px 0px 5px #cccccc; float:left; margin:2px; padding:0px; width:16px; height:16px;}
+.sbc a:hover {border:1px solid #000000;}
+.sbc_clear {overflow:hidden; width:100%;}
