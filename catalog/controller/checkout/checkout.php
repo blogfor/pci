@@ -8,6 +8,8 @@ class ControllerCheckoutCheckout extends Controller {
 		
 		// Validate minimum quantity requirments.			
 		$products = $this->cart->getProducts();
+                
+              
 				
 		foreach ($products as $product) {
 			$product_total = 0;

@@ -4,8 +4,6 @@
 	Theme Name: pcc
 	Description: pcc - Responsive Template
 	Version: 1.0
-	Author: iThemesLab
-	Website: http://ithemeslab.com
 */
 
 /* ------------------------------------------ */
@@ -5898,4 +5896,26 @@ margin-right: 10px;position: absolute;left: 0;bottom: 1px;background-color: #aaa
 	font-weight: bold;
     color: #950707;
     border-bottom: 1px #ccc solid;
+}
+
+
+.price-option{
+    min-width: 70px;
+    float: left;
+    display: block;
+    font-size: 12px;
+    padding-right: 10px;
+}
+
+
+.page_content .list{
+	width:100% !important;
+}
+.page_content .list thead tr td{
+	line-height:35px;
+	background-color:#ECECEC;
+	font-weight:bold;
+}
+.page_content .list td{
+	line-height:25px;
 }

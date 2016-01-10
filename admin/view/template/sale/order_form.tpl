@@ -172,6 +172,26 @@
                 <span class="error"><?php echo $error_payment_zone; ?></span>
                 <?php } ?></td>
             </tr>
+            
+            <tr>
+              <td>Payment Details</td>
+              <td>
+              
+              <?php if($response_text!=''){
+                   
+                   $resposnse_text=base64_decode(unserialize($response_text));
+                   if($resposnse_text['txnResponseCode']==0)
+                   echo 'PAYMENT SUCCESSFUL';
+                   else
+                   echo 'PAYMENT CANCEL';
+                   
+                   
+                   }                   
+                   ?>
+                   
+              </td>
+            </tr>
+            
           </table>
         </div>
         <div id="tab-shipping" class="vtabs-content">

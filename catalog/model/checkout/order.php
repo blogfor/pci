@@ -676,5 +676,12 @@ class ModelCheckoutOrder extends Model {
 			}
 		}
 	}
+	
+	public function setresponse($order_id,$response){		
+		$response_data=base64_encode(serialize($response));
+		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET response_text = '".$response_data."', date_modified = NOW(),order_status_id='2' WHERE order_id = '".(int)$order_id."'");
+		
+	}
+	
 }
 ?>

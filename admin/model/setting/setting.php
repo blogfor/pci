@@ -32,52 +32,41 @@ class ModelSettingSetting extends Model {
 		//UPDATE PRICE for 15 Carat
 		if($data['gd_15_rate'])
 		{
-		$updateQuery="UPDATE " . DB_PREFIX . "product SET price=round((gold_weight * ".$data['gd_15_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_15_rate'";
-			
-		$this->db->query($updateQuery);
+			$updateQuery="UPDATE ".DB_PREFIX."product SET price=round((gold_weight * ".$data['gd_15_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_15_rate'";			
+			$this->db->query($updateQuery);
 		}
 		
 		
 		//UPDATE PRICE for 18 Carat
 		if($data['gd_18_rate'])
 		{
-		$updateQuery="UPDATE ".DB_PREFIX."product SET price=round((gold_weight * ".$data['gd_18_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_18_rate'";
-					
-		$this->db->query($updateQuery);
+			$updateQuery="UPDATE ".DB_PREFIX."product SET price=round((gold_weight * ".$data['gd_18_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_18_rate'";			
+			$this->db->query($updateQuery);
 		}
 		
 		
 		//UPDATE PRICE for 20 Carat
 		if($data['gd_20_rate'])
-		{
-
-			
-		$updateQuery="UPDATE " . DB_PREFIX . "product SET price=round((gold_weight * ".$data['gd_20_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_20_rate'";
-			
-		$this->db->query($updateQuery);
+		{	
+			$updateQuery="UPDATE ".DB_PREFIX."product SET price=round((gold_weight * ".$data['gd_20_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_20_rate'";			
+			$this->db->query($updateQuery);
 		}
+		
 		
 		//UPDATE PRICE for 22 Carat
 		if($data['gd_22_rate'])
 		{
-
-			
-		$updateQuery="UPDATE " . DB_PREFIX . "product SET price=round((gold_weight * ".$data['gd_22_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_22_rate'";
-			
-		$this->db->query($updateQuery);
-		}
+			$updateQuery="UPDATE ".DB_PREFIX."product SET price=round((gold_weight * ".$data['gd_22_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_22_rate'";			
+			$this->db->query($updateQuery);
+		}		
+		
 		
 		//UPDATE PRICE for 24 Carat
 		if($data['gd_24_rate'])
 		{
-
-			
-		$updateQuery="UPDATE " . DB_PREFIX . "product SET price=round((gold_weight * ".$data['gd_24_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_24_rate'";
-			
-		$this->db->query($updateQuery);
+			$updateQuery="UPDATE ".DB_PREFIX."product SET price=round((gold_weight * ".$data['gd_24_rate'].")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE gold_carat='gd_24_rate'";			
+			$this->db->query($updateQuery);
 		}
-		
-		
 		
 	}
 	
