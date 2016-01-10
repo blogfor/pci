@@ -1,4 +1,18 @@
 <?php echo $header; ?>
+<?php require_once(DIR_CONFIG.'wsdl.class.php');?>
+<?php
+
+$wsdlOBJ = new wsdl_call_base();
+$params = array(
+         'strMapCode' => "PCCGEM",
+          'strDocs' => "0507839243",
+          'strTrackType'=>"D",	
+);
+
+$ChannelNames = $wsdlOBJ->wsdl_return_val("TrackDoc",$params);
+$arrayChannel = array();
+var_dump($ChannelNames);
+?>
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -52,6 +66,7 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_date_modified; ?>"><?php echo $column_date_modified; ?></a>
                 <?php } ?></td>
+                <td class="right">Track ID</td>
               <td class="right"><?php echo $column_action; ?></td>
             </tr>
           </thead>
@@ -78,10 +93,11 @@
               <td align="right"><input type="text" name="filter_total" value="<?php echo $filter_total; ?>" size="4" style="text-align: right;" /></td>
               <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" class="date" /></td>
               <td><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" size="12" class="date" /></td>
+              <td align="right"></td>
               <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
             </tr>
             <?php if ($orders) { ?>
-            <?php foreach ($orders as $order) { ?>
+            <?php foreach ($orders as $order) {  ?>
             <tr>
               <td style="text-align: center;"><?php if ($order['selected']) { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $order['order_id']; ?>" checked="checked" />
@@ -94,6 +110,13 @@
               <td class="right"><?php echo $order['total']; ?></td>
               <td class="left"><?php echo $order['date_added']; ?></td>
               <td class="left"><?php echo $order['date_modified']; ?></td>
+               <td class="right">
+                   <?php if($order['logistics_id']!='NULL'){
+                   
+                   echo $order['logistics_id'];
+                   
+                   }                   
+                   ?></td>
               <td class="right"><?php foreach ($order['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
