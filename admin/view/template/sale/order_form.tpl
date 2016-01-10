@@ -249,6 +249,11 @@
                 <span class="error"><?php echo $error_shipping_zone; ?></span>
                 <?php } ?></td>
             </tr>
+            <tr>
+                <td class="left">Order Tracking ID (Sequel Logistics ID)</td>
+                <td class="left"><input type="text" name="logistics_id" id="logistics_id" value="<?php echo $logistics_id; ?>" />
+                </td>
+              </tr>
           </table>
         </div>
         <div id="tab-product" class="vtabs-content">
@@ -554,6 +559,7 @@
                 <td class="left"><input type="text" name="affiliate" value="<?php echo $affiliate; ?>" />
                   <input type="hidden" name="affiliate_id" value="<?php echo $affiliate_id; ?>" /></td>
               </tr>
+              
             </tbody>
             <tfoot>
               <tr>

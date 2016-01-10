@@ -228,6 +228,13 @@
 				'start'              => ($page - 1) * $limit,
 				'limit'              => $limit
 			);
+                        
+                        if (isset($this->request->get['price_range']) ) {
+                            $_SESSION['price_search']=$this->request->get['price_range'];
+                            $data['price_range']=$this->request->get['price_range'];
+                        }else if( isset($_SESSION['price_search'])){
+                            $data['price_range']= $_SESSION['price_search'];                            
+                        }
 					
 			$product_total = $this->model_catalog_product->getTotalProducts($data); 
 			
@@ -266,6 +273,7 @@
 								
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
+					'product_model'  => $result['model'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',

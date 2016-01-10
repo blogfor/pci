@@ -332,6 +332,7 @@ class ControllerSaleOrder extends Controller {
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
 				'status'        => $result['status'],
+                                'logistics_id'  => $result['logistics_id'],
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
@@ -863,6 +864,14 @@ class ControllerSaleOrder extends Controller {
       		$this->data['affiliate'] = '';
     	}
 				
+        if (isset($this->request->post['logistics_id'])) {
+      		$this->data['logistics_id'] = $this->request->post['logistics_id'];
+    	} elseif (!empty($order_info)) { 
+			$this->data['logistics_id'] = $order_info['logistics_id'];
+		} else {
+      		$this->data['logistics_id'] = '';
+    	}
+        
 		if (isset($this->request->post['order_status_id'])) {
       		$this->data['order_status_id'] = $this->request->post['order_status_id'];
     	} elseif (!empty($order_info)) { 

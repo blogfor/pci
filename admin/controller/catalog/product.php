@@ -1287,7 +1287,70 @@ class ControllerCatalogProduct extends Controller {
             $this->data['diamond_price'] = '0';
         }
 
+         if (isset($this->request->post['stone_price'])) {
+            $this->data['stone_price'] = $this->request->post['stone_price'];
+        } elseif (!empty($product_info)) {
+            $this->data['stone_price'] = $product_info['stone_price'];
+        } else {
+            $this->data['stone_price'] = '0';
+        }
+        
+        if (isset($this->request->post['making_charges'])) {
+            $this->data['making_charges'] = $this->request->post['making_charges'];
+        } elseif (!empty($product_info)) {
+            $this->data['making_charges'] = $product_info['making_charges'];
+        } else {
+            $this->data['making_charges'] = '0';
+        }
+        
+        if (isset($this->request->post['saph_price'])) {
+            $this->data['saph_price'] = $this->request->post['saph_price'];
+        } elseif (!empty($product_info)) {
+            $this->data['saph_price'] = $product_info['saph_price'];
+        } else {
+            $this->data['saph_price'] = '0';
+        }
 
+        if (isset($this->request->post['eme_price'])) {
+            $this->data['eme_price'] = $this->request->post['eme_price'];
+        } elseif (!empty($product_info)) {
+            $this->data['eme_price'] = $product_info['eme_price'];
+        } else {
+            $this->data['eme_price'] = '0';
+        }
+        
+        if (isset($this->request->post['ruby_price'])) {
+            $this->data['ruby_price'] = $this->request->post['ruby_price'];
+        } elseif (!empty($product_info)) {
+            $this->data['ruby_price'] = $product_info['ruby_price'];
+        } else {
+            $this->data['ruby_price'] = '0';
+        }
+        
+        if (isset($this->request->post['sgl_cert_no'])) {
+            $this->data['sgl_cert_no'] = $this->request->post['sgl_cert_no'];
+        } elseif (!empty($product_info)) {
+            $this->data['sgl_cert_no'] = $product_info['sgl_cert_no'];
+        } else {
+            $this->data['sgl_cert_no'] = '0';
+        }
+        
+         if (isset($this->request->post['mfg_code'])) {
+            $this->data['mfg_code'] = $this->request->post['mfg_code'];
+        } elseif (!empty($product_info)) {
+            $this->data['mfg_code'] = $product_info['mfg_code'];
+        } else {
+            $this->data['mfg_code'] = '0';
+        }
+        
+         if (isset($this->request->post['entry_no'])) {
+            $this->data['entry_no'] = $this->request->post['entry_no'];
+        } elseif (!empty($product_info)) {
+            $this->data['entry_no'] = $product_info['entry_no'];
+        } else {
+            $this->data['entry_no'] = '0';
+        }
+        
         if (isset($this->request->post['product_reward'])) {
             $this->data['product_reward'] = $this->request->post['product_reward'];
         } elseif (isset($this->request->get['product_id'])) {
