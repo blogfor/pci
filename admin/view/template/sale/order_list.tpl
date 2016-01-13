@@ -2,7 +2,7 @@
 <?php require_once(DIR_CONFIG.'wsdl.class.php');?>
 <?php
 
-$wsdlOBJ = new wsdl_call_base();
+/*$wsdlOBJ = new wsdl_call_base();
 $params = array(
          'strMapCode' => "PCCGEM",
           'strDocs' => "0507839243",
@@ -11,7 +11,7 @@ $params = array(
 
 $ChannelNames = $wsdlOBJ->wsdl_return_val("TrackDoc",$params);
 $arrayChannel = array();
-var_dump($ChannelNames);
+var_dump($ChannelNames);*/
 ?>
 <div id="content">
   <div class="breadcrumb">
@@ -56,6 +56,8 @@ var_dump($ChannelNames);
                 <?php } else { ?>
                 <a href="<?php echo $sort_total; ?>"><?php echo $column_total; ?></a>
                 <?php } ?></td>
+                <td class="right">Payment Status</td>
+                
               <td class="left"><?php if ($sort == 'o.date_added') { ?>
                 <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
                 <?php } else { ?>
@@ -91,6 +93,7 @@ var_dump($ChannelNames);
                   <?php } ?>
                 </select></td>
               <td align="right"><input type="text" name="filter_total" value="<?php echo $filter_total; ?>" size="4" style="text-align: right;" /></td>
+              <td align="right"></td>
               <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" class="date" /></td>
               <td><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" size="12" class="date" /></td>
               <td align="right"></td>
@@ -108,6 +111,17 @@ var_dump($ChannelNames);
               <td class="left"><?php echo $order['customer']; ?></td>
               <td class="left"><?php echo $order['status']; ?></td>
               <td class="right"><?php echo $order['total']; ?></td>
+              <td class="right">
+                   <?php if($order['response_text']!=''){
+                   
+                   $resposnse_text=base64_decode(unserialize($order['response_text']));
+                   if($resposnse_text['txnResponseCode']==0)
+                   echo 'PAYMENT SUCCESSFUL';
+                   else
+                   echo 'PAYMENT CANCEL';
+                   }                   
+                   ?></td>
+                   
               <td class="left"><?php echo $order['date_added']; ?></td>
               <td class="left"><?php echo $order['date_modified']; ?></td>
                <td class="right">
