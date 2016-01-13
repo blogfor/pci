@@ -1,18 +1,5 @@
 <?php echo $header; ?>
-<?php require_once(DIR_CONFIG.'wsdl.class.php');?>
-<?php
 
-/*$wsdlOBJ = new wsdl_call_base();
-$params = array(
-         'strMapCode' => "PCCGEM",
-          'strDocs' => "0507839243",
-          'strTrackType'=>"D",	
-);
-
-$ChannelNames = $wsdlOBJ->wsdl_return_val("TrackDoc",$params);
-$arrayChannel = array();
-var_dump($ChannelNames);*/
-?>
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>

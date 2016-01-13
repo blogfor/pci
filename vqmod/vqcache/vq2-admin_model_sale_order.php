@@ -484,6 +484,7 @@ class ModelSaleOrder extends Model {
 				'date_added'              => $order_query->row['date_added'],
 				'date_modified'           => $order_query->row['date_modified'],
                 'logistics_id'            => $order_query->row['logistics_id'],
+				'response_text'            => $order_query->row['response_text'],
 			);
 		} else {
 			return false;
@@ -506,7 +507,7 @@ LEFT JOIN " . DB_PREFIX . "order_status oos ON (o.order_status_id = oos.order_st
 
 	}
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id,o.logistics_id,CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT o.order_id,o.logistics_id,o.response_text,CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
 
 		if (isset($data['filter_order_status_id']) && !is_null($data['filter_order_status_id'])) {
 			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";

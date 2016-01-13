@@ -1655,6 +1655,8 @@ class ControllerSaleOrder extends Controller {
 			$this->data['shipping_zone'] = $order_info['shipping_zone'];
 			$this->data['shipping_zone_code'] = $order_info['shipping_zone_code'];
 			$this->data['shipping_country'] = $order_info['shipping_country'];
+                        
+                        $this->data['logistics_id'] = $order_info['logistics_id'];
 
 			$this->data['products'] = array();
 
