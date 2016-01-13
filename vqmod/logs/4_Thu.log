@@ -1,30 +1,14 @@
----------- Date: 2015-08-20 16:45:22 ~ IP : 45.123.216.37 ----------
-REQUEST URI : /index.php?route=product/category&amp;path=18
+---------- Date: 2016-01-07 17:01:26 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /pccindia/
 MOD DETAILS:
-   modFile   : /mounted-storage/home127/sub007/sc71544-XPPQ/pcc/vqmod/xml/show_filters_from_products_not_categories.xml
-   id        : Show Filters from Products not Categories in Filter Module
+   modFile   : E:\xampp\htdocs\pccindia\vqmod/xml/show_filters_from_products_not_categories_include_sub_cats.xml
+   id        : Show Filters from Products not Categories Include Sub Cats in Filter Module
    version   : 1.0
    vqmver    : 2.4.1
    author    : www.best-byte.com
 
 File Name    : catalog/model/catalog/category.php(0)
 VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
-
-----------------------------------------------------------------------
-
-
----------- Date: 2015-08-20 16:53:17 ~ IP : 202.142.65.12 ----------
-REQUEST URI : /index.php?route=product/category&amp;path=25_28
-MOD DETAILS:
-   modFile   : /mounted-storage/home127/sub007/sc71544-XPPQ/pcc/vqmod/xml/show_filters_from_products_not_categories.xml
-   id        : Show Filters from Products not Categories in Filter Module
-   version   : 1.0
-   vqmver    : 2.4.1
-   author    : www.best-byte.com
-
-File Name    : catalog/model/catalog/category.php(0)
-VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
-
 ----------------------------------------------------------------------
 
 

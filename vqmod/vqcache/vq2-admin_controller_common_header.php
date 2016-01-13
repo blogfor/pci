@@ -103,6 +103,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_voucher_theme'] = $this->language->get('text_voucher_theme');
 		$this->data['text_weight_class'] = $this->language->get('text_weight_class');
 		$this->data['text_length_class'] = $this->language->get('text_length_class');
+		$this->data['text_vqmod_manager'] = $this->language->get('text_vqmod_manager');
 		$this->data['text_zone'] = $this->language->get('text_zone');
         $this->data['text_openbay_extension'] = $this->language->get('text_openbay_extension');
         $this->data['text_openbay_dashboard'] = $this->language->get('text_openbay_dashboard');
@@ -194,6 +195,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['voucher_theme'] = $this->url->link('sale/voucher_theme', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['weight_class'] = $this->url->link('localisation/weight_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['length_class'] = $this->url->link('localisation/length_class', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['vqmod_manager'] = $this->url->link('module/vqmod_manager', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 
             $this->data['openbay_link_extension']           = $this->url->link('extension/openbay', 'token=' . $this->session->data['token'], 'SSL');
