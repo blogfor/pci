@@ -1562,12 +1562,3 @@ background: -ms-linear-gradient(45deg, rgba(255,227,234,1) 0%, rgba(255,233,238,
 background: linear-gradient(45deg, rgba(255,227,234,1) 0%, rgba(255,233,238,0.17) 20%, rgba(255,255,255,0.17) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffe3ea', endColorstr='#ffffff', GradientType=1 );
 }
-
-.price-option{
-    min-width: 70px;
-    float: left;
-    display: block;
-    font-size: 12px;
-    padding-right: 10px;
-}
-

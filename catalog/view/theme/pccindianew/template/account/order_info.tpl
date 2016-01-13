@@ -1,8 +1,6 @@
 <?php echo $header; ?>
 
 
-
-
 <!-- Start breadcrumb  -->
 <section>
     <div class="container">
@@ -60,9 +58,24 @@
                                             <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?></td>
                                         <td class="left" style="width: 50%;"><?php if ($payment_method) { ?>
                                             <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
+                                               <?php 
+                                              
+                                               if($response_text!=''){                                               
+                                               $resposnse=base64_decode(unserialize($response_text));
+                                               
+                                               if($resposnse['txnResponseCode']==0)
+                                               echo 'PAYMENT SUCCESSFUL';
+                                               else
+                                               echo 'PAYMENT CANCEL';
+                                               }                   
+                                               
+                                               //print_r($resposnse);
+                                               ?>
+                   
                                             <?php } ?>
                                             <?php if ($shipping_method) { ?>
-                                            <b><?php echo $text_shipping_method; ?></b> <?php echo $shipping_method; ?>
+                                            <br /><b><?php echo $text_shipping_method; ?></b> <?php echo $shipping_method; ?>
+                                            <?php if(!empty($logistics_id)) echo "Tracking ID:".$logistics_id; ?>                                           
                                             <?php } ?></td>
                                     </tr>
                                 </tbody>
@@ -88,11 +101,11 @@
                             <table class="list">
                                 <thead>
                                     <tr>
-                                        <td class="left"><?php echo $column_name; ?></td>
-                                        <td class="left"><?php echo $column_model; ?></td>
-                                        <td class="right"><?php echo $column_quantity; ?></td>
-                                        <td class="right"><?php echo $column_price; ?></td>
-                                        <td class="right"><?php echo $column_total; ?></td>
+                                        <td ><?php echo $column_name; ?></td>
+                                        <td ><?php echo $column_model; ?></td>
+                                        <td ><?php echo $column_quantity; ?></td>
+                                        <td ><?php echo $column_price; ?></td>
+                                        <td ><?php echo $column_total; ?></td>
                                         <?php if ($products) { ?>
                                         <td style="width: 1px;"></td>
                                         <?php } ?>
@@ -101,16 +114,16 @@
                                 <tbody>
                                     <?php foreach ($products as $product) { ?>
                                     <tr>
-                                        <td class="left"><?php echo $product['name']; ?>
+                                        <td><?php echo $product['name']; ?>
                                             <?php foreach ($product['option'] as $option) { ?>
                                             <br />
                                             &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
                                             <?php } ?></td>
-                                        <td class="left"><?php echo $product['model']; ?></td>
-                                        <td class="right"><?php echo $product['quantity']; ?></td>
-                                        <td class="right"><?php echo $product['price']; ?></td>
-                                        <td class="right"><?php echo $product['total']; ?></td>
-                                        <td class="right"><a href="<?php echo $product['return']; ?>"><img src="catalog/view/theme/default/image/return.png" alt="<?php echo $button_return; ?>" title="<?php echo $button_return; ?>" /></a></td>
+                                        <td><?php echo $product['model']; ?></td>
+                                        <td><?php echo $product['quantity']; ?></td>
+                                        <td><?php echo $product['price']; ?></td>
+                                        <td><?php echo $product['total']; ?></td>
+                                        <td><!--<a href="<?php echo $product['return']; ?>"><img src="catalog/view/theme/default/image/return.png" alt="<?php echo $button_return; ?>" title="<?php echo $button_return; ?>" /></a>--></td>
                                     </tr>
                                     <?php } ?>
                                     <?php foreach ($vouchers as $voucher) { ?>
@@ -130,8 +143,8 @@
                                     <?php foreach ($totals as $total) { ?>
                                     <tr>
                                         <td colspan="3"></td>
-                                        <td class="right"><b><?php echo $total['title']; ?>:</b></td>
-                                        <td class="right"><?php echo $total['text']; ?></td>
+                                        <td><b><?php echo $total['title']; ?>:</b></td>
+                                        <td><?php echo $total['text']; ?></td>
                                         <?php if ($products) { ?>
                                         <td></td>
                                         <?php } ?>

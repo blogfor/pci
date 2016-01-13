@@ -96,7 +96,21 @@ A jewel of jewels  </td>
                     <td style="width:100">&nbsp;</td>
                     <td style="border-bottom:1px #333 solid">
                         PAYMENT MODE
-                        <?php echo $payment_method; ?>
+                        <?php echo $payment_method; ?> 
+                       	<?php    
+                        	
+                            if($response_text!=''){                   
+                               $resposnse_data=unserialize(base64_decode($response_text));                            
+                               if($resposnse_data['txnResponseCode']==0){
+                               echo '<br>PAYMENT SUCCESSFUL';
+                               echo '<br>Transaction No:'.$resposnse_data['transactionNo'];
+                               }
+                               else
+                               echo 'PAYMENT CANCEL';
+                               }
+                                                  
+                   		?>
+                        
                     </td>                    
                 </tr>
                 

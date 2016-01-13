@@ -149,7 +149,11 @@ class ModelCheckoutOrder extends Model {
 				'user_agent'              => $order_query->row['user_agent'],	
 				'accept_language'         => $order_query->row['accept_language'],				
 				'date_modified'           => $order_query->row['date_modified'],
-				'date_added'              => $order_query->row['date_added']
+				'date_added'              => $order_query->row['date_added'],
+				'logistics_id'            => $order_query->row['logistics_id'],
+				'response_text'           => $order_query->row['response_text']
+				
+				
 			);
 		} else {
 			return false;	
@@ -158,9 +162,10 @@ class ModelCheckoutOrder extends Model {
 
 	public function confirm($order_id, $order_status_id, $comment = '', $notify = false) {
 		$order_info = $this->getOrder($order_id);
-		 
-		if ($order_info && !$order_info['order_status_id']) {
-			// Fraud Detection
+		
+		//if ($order_info && !$order_info['order_status_id']) {
+		if ($order_info && $order_info['order_status_id']>0) {	
+		 	// Fraud Detection
 			if ($this->config->get('config_fraud_detection')) {
 				$this->load->model('checkout/fraud');
 				
@@ -170,6 +175,7 @@ class ModelCheckoutOrder extends Model {
 					$order_status_id = $this->config->get('config_fraud_status_id');
 				}
 			}
+			
 
 			// Ban IP
 			$status = false;
@@ -245,6 +251,10 @@ class ModelCheckoutOrder extends Model {
 				}
 			}
 			
+			
+			
+			
+			
 			// Send out order confirmation mail
 			$language = new Language($order_info['language_directory']);
 			$language->load($order_info['language_filename']);
@@ -306,6 +316,10 @@ class ModelCheckoutOrder extends Model {
 			$template->data['email'] = $order_info['email'];
 			$template->data['telephone'] = $order_info['telephone'];
 			$template->data['ip'] = $order_info['ip'];
+			
+			
+			$template->data['response_text']=$order_info['response_text'];
+			
 			
 			if ($comment && $notify) {
 				$template->data['comment'] = nl2br($comment);
@@ -422,6 +436,7 @@ class ModelCheckoutOrder extends Model {
 				);
 			}
 	
+	
 			$template->data['totals'] = $order_total_query->rows;
 			
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/order.tpl')) {
@@ -429,6 +444,8 @@ class ModelCheckoutOrder extends Model {
 			} else {
 				$html = $template->fetch('default/template/mail/order.tpl');
 			}
+			
+			
             
             // Can not send confirmation emails for CBA orders as email is unknown
             $this->load->model('payment/amazon_checkout');
@@ -488,7 +505,8 @@ class ModelCheckoutOrder extends Model {
                 }
 
                 $text .= $language->get('text_new_footer') . "\n\n";
-
+				
+			
                 $mail = new Mail();
                 $mail->protocol = $this->config->get('config_mail_protocol');
                 $mail->parameter = $this->config->get('config_mail_parameter');
@@ -676,5 +694,12 @@ class ModelCheckoutOrder extends Model {
 			}
 		}
 	}
+	
+	public function setresponse($order_id,$response){		
+		$response_data=base64_encode(serialize($response));
+		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET response_text = '".$response_data."', date_modified = NOW(),order_status_id='2' WHERE order_id = '".(int)$order_id."'");
+		
+	}
+	
 }
 ?>

@@ -144,7 +144,7 @@ class ControllerAccountOrder extends Controller {
 		$this->response->setOutput($this->render());				
 	}
 	
-	public function info() { 
+	public function info() {
 		$this->language->load('account/order');
 		
 		if (isset($this->request->get['order_id'])) {
@@ -162,6 +162,11 @@ class ControllerAccountOrder extends Controller {
 		$this->load->model('account/order');
 			
 		$order_info = $this->model_account_order->getOrder($order_id);
+		
+
+		$this->data['logistics_id']=	$order_info['logistics_id'];
+		$this->data['response_text']=	$order_info['response_text'];
+		
 		
 		if ($order_info) {
 			$this->document->setTitle($this->language->get('text_order'));
@@ -287,6 +292,8 @@ class ControllerAccountOrder extends Controller {
 				'{zone_code}',
       			'{country}'
 			);
+			
+			
 	
 			$replace = array(
 	  			'firstname' => $order_info['shipping_firstname'],
