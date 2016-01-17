@@ -442,6 +442,20 @@ $(document).ready(function() {
             $('.success').fadeIn('slow');
             $('#cart-total').html(json['total']);
             $('html, body').animate({ scrollTop: 0 }, 'slow');
+            
+                        BootstrapDialog.show({
+                                title: 'Cart updated',
+                                message: $(".title span").text()+' has been added to the cart!',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
     }
     }
     });

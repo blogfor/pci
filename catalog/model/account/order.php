@@ -96,7 +96,8 @@ class ModelAccountOrder extends Model {
 				'date_added'              => $order_query->row['date_added'],
 				'ip'                      => $order_query->row['ip'],
 				'logistics_id'            => $order_query->row['logistics_id'],
-				'response_text'           => $order_query->row['response_text']
+				'response_text'           => $order_query->row['response_text'],
+                                'pan'           => $order_query->row['pan'],
 			);
 		} else {
 			return false;	

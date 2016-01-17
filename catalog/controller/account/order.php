@@ -166,7 +166,7 @@ class ControllerAccountOrder extends Controller {
 
 		$this->data['logistics_id']=	$order_info['logistics_id'];
 		$this->data['response_text']=	$order_info['response_text'];
-		
+		$this->data['pan']=	$order_info['pan'];
 		
 		if ($order_info) {
 			$this->document->setTitle($this->language->get('text_order'));

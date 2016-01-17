@@ -156,3 +156,6 @@
 2016-01-17 7:14:02 - PHP Notice:  Undefined variable: action in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 168
 2016-01-17 7:17:56 - PHP Notice:  Error: Could not load model payment/bank_axis_transfer! in E:\xampp\htdocs\pccindia\vqmod\vqcache\vq2-system_engine_loader.php on line 48
 2016-01-17 7:19:59 - PHP Notice:  Error: Could not load model payment/bank_axis_transfer! in E:\xampp\htdocs\pccindia\vqmod\vqcache\vq2-system_engine_loader.php on line 48
+2016-01-17 11:17:51 - PHP Notice:  Undefined variable: style in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\common\header.tpl on line 33
+2016-01-17 11:17:51 - PHP Notice:  Undefined variable: style in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\common\header.tpl on line 33
+2016-01-17 11:17:51 - PHP Notice:  Undefined variable: style in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\common\header.tpl on line 33

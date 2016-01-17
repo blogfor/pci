@@ -12,3 +12,17 @@ VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $query = $this->db->que
 ----------------------------------------------------------------------
 
 
+---------- Date: 2016-01-17 11:17:53 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /pccindia/
+MOD DETAILS:
+   modFile   : E:\xampp\htdocs\pccindia\vqmod/xml/shopbycolor.xml
+   id        : Shop By Color
+   version   : 1.0.0
+   vqmver    : 2.4.0
+   author    : <a onClick="window.open('http://www.opencart.com/index.php?route=extension/extension&filter_username=frymi');" title="View all OpenCart extension by frymi">frymi</a>
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <?php foreach ($styles as $style) { ?>
+----------------------------------------------------------------------
+
+

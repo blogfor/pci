@@ -20,8 +20,14 @@ class ControllerPaymentBankAxisTransfer extends Controller {
 	
 	
 	public function axispayment() {
+            $this->language->load('payment/bank_axis_transfer');
 		$this->load->model('checkout/order');
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+                //Update PAN
+                if(isset($_GET['P']))
+                {
+                    $this->model_checkout_order->updatePan($this->session->data['order_id'],$_GET['P']);
+                }
 		$gateway_data=array();	
 		$gateway_data['Title']="PHP VPC 3-Party";
 		$gateway_data['virtualPaymentClientURL']="https://migs.mastercard.com.au/vpcpay";
@@ -69,7 +75,7 @@ class ControllerPaymentBankAxisTransfer extends Controller {
 	
 	
 	public function axispaymentreturn(){
-		
+		$this->language->load('payment/bank_axis_transfer');
 		$SECURE_SECRET = $this->config->get('bank_axis_hash_secret');
 		$vpc_Txn_Secure_Hash = $_GET["vpc_SecureHash"];
 		unset($_GET["vpc_SecureHash"]); 

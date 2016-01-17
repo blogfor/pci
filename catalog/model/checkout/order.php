@@ -151,8 +151,8 @@ class ModelCheckoutOrder extends Model {
 				'date_modified'           => $order_query->row['date_modified'],
 				'date_added'              => $order_query->row['date_added'],
 				'logistics_id'            => $order_query->row['logistics_id'],
-				'response_text'           => $order_query->row['response_text']
-				
+				'response_text'           => $order_query->row['response_text'],
+				'pan'           => $order_query->row['pan']
 				
 			);
 		} else {
@@ -695,6 +695,13 @@ class ModelCheckoutOrder extends Model {
 		}
 	}
 	
+        public function updatePan($order_id,$pan)
+        {
+            
+            $this->db->query("UPDATE " . DB_PREFIX . "order
+ SET pan='" . $this->db->escape($pan) . "' WHERE order_id = '" . (int)$order_id . "'");
+        }
+        
 	public function setresponse($order_id,$response){		
 		$response_data=base64_encode(serialize($response));
 		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET response_text = '".$response_data."', date_modified = NOW(),order_status_id='2' WHERE order_id = '".(int)$order_id."'");

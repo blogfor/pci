@@ -1,33 +1,1 @@
-<h2><?php echo $text_instruction; ?></h2>
-<div class="content">
-  <p><?php echo $text_description; ?></p>
-  <p><?php echo $bank; ?></p>
-  <p><?php echo $text_payment; ?></p>
-</div>
-
-<form >
-<div class="buttons">
-  <div class="right">   
-    <input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="btn" />
-  </div>
-</div>
-</form>
-
-
-<script type="text/javascript">
-<!--
-
-$('#button-confirm').bind('click', function() {
-	/*
-	$.ajax({ 
-		type: 'get',
-		url: 'index.php?route=payment/bank_axis_transfer/confirm',
-		success: function() {
-			location = '<?php echo $AxisBankAction; ?>';
-		}		
-	});
-	*/
-	window.location.href="<?php echo $AxisBankAction; ?>";
-});
-
-//--></script> 
+<h2><?php echo $text_instruction; ?></h2><div class="content">  <p><?php echo $text_description; ?></p>  <p><?php echo $bank; ?></p>  <p><?php echo $text_payment; ?></p></div><form ><div class="buttons">  <div class="right">       <input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="btn" />  </div></div></form><script type="text/javascript"><!--$('#button-confirm').bind('click', function() {function ValidatePAN(Obj) {           if (Obj.value != "") {            ObjVal = Obj.value;            var panPat = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;            if (ObjVal.search(panPat) == -1) {                alert("Invalid Pan No");                Obj.focus();                return false;            }        }  }if($('#pan').length){        if($('#pan').val()=='') {                alert("Invalid Pan No");                $('#pan').focus();                return false;        }        else {            if ($('#pan').val() != "") {                ObjVal = $('#pan').val();                var panPat = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;                if (ObjVal.search(panPat) == -1) {                    alert("Invalid Pan No");                    $('#pan').focus();                    return false;                }                else                    {                        window.location.href="<?php echo $AxisBankAction; ?>&P="+$('#pan').val();                    }            }        }	/*	$.ajax({ 		type: 'get',		url: 'index.php?route=payment/bank_axis_transfer/confirm',		success: function() {			location = '<?php echo $AxisBankAction; ?>';		}			});	*/}else    {	window.location.href="<?php echo $AxisBankAction; ?>";    }});//--></script> 

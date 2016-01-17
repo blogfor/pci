@@ -162,6 +162,11 @@
             <td><?php echo $text_date_modified; ?></td>
             <td><?php echo $date_modified; ?></td>
           </tr>
+          
+          <tr>
+            <td>PAN</td>
+            <td><?php echo $pan; ?></td>
+          </tr>
         </table>
       </div>
       <div id="tab-payment" class="vtabs-content">

@@ -1557,6 +1557,12 @@ class ControllerSaleOrder extends Controller {
 			} else {
 				$this->data['invoice_no'] = '';
 			}
+                        
+                        if ($order_info['pan']) {
+				$this->data['pan'] = $order_info['pan'];
+			} else {
+				$this->data['pan'] = 'N/A';
+			}
 			
             $this->data['amazon_order_id'] = $order_info['amazon_order_id'];
 			$this->data['store_name'] = $order_info['store_name'];

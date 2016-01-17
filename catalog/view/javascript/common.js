@@ -35,6 +35,9 @@ $(document).ready(function() {
 		$('#cart').live('mouseleave', function() {
 			$(this).removeClass('active');
 		});
+                
+
+
 	});
 	
 	/* Mega Menu */
@@ -133,6 +136,37 @@ function addToCart(product_id, quantity) {
 				$('#cart-total').html(json['total']);
 				
 				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+                                if($("#P"+product_id).length) {
+                                BootstrapDialog.show({
+                                title: 'Cart updated',
+                                message: $("#P"+product_id+" .product_name a").text()+' has been added to the cart!',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                                }
+                                else
+                                    {
+                                        BootstrapDialog.show({
+                                title: 'Cart updated',
+                                message: $(".wishlist-info .name a").text()+' has been added to the cart!',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                                    }
 			}	
 		}
 	});

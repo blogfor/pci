@@ -46,8 +46,8 @@
                         <div class="page_content">                
 
                             <?php if ($products) { ?>
-                            <div class="wishlist-info">
-                                <table>
+                            <div class="wishlist-info table-responsive">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <td class="image"><?php echo $column_image; ?></td>
