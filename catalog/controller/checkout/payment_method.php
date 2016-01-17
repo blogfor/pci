@@ -72,7 +72,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				$sort_order[$key] = $value['sort_order'];
 			}
 	
-			array_multisort($sort_order, SORT_ASC, $method_data);				
+			array_multisort($sort_order, SORT_ASC, $method_data);			
+			
 			$this->session->data['payment_methods'] = $method_data;	
 			
 		}			

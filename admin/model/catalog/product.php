@@ -1,7 +1,7 @@
 <?php
 class ModelCatalogProduct extends Model {
 	public function addProduct($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(),gold_carat='".$data['gold_carat']."',gold_weight='".$data['gold_weight']."',diamond_price='".$data['diamond_price']."'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(),gold_carat='".$data['gold_carat']."',gold_weight='".$data['gold_weight']."',diamond_price='".$data['diamond_price']."',stone_price='".$data['stone_price']."',making_charges='".$data['making_charges']."',saph_price='".$data['saph_price']."',eme_price='".$data['eme_price']."',ruby_price='".$data['ruby_price']."',sgl_cert_no='".$data['sgl_cert_no']."',mfg_code='".$data['mfg_code']."',entry_no='".$data['entry_no']."'");
 		$product_id = $this->db->getLastId();
                 
                 /*
@@ -104,14 +104,20 @@ class ModelCatalogProduct extends Model {
                 /*
                  * Net price calculation
                  */
-                $GOLD_PRICE=$gold_rate*$data['gold_weight'];
-                $MAN_CHARGE=($GOLD_PRICE*$mancharges['man_charge_per'])/100;
-                $MAN_CHARGE=($MAN_CHARGE>$mancharges['man_charge_min'])?$MAN_CHARGE:$mancharges['man_charge_min'];
+//                $GOLD_PRICE=$gold_rate*$data['gold_weight'];
+//                $MAN_CHARGE=($GOLD_PRICE*$mancharges['man_charge_per'])/100;
+//                $MAN_CHARGE=($MAN_CHARGE>$mancharges['man_charge_min'])?$MAN_CHARGE:$mancharges['man_charge_min'];
+//                
+//                $NET_PRICE=$GOLD_PRICE+$MAN_CHARGE+$data['diamond_price'];
                 
-                $NET_PRICE=$GOLD_PRICE+$MAN_CHARGE+$data['diamond_price'];
-		        //$this->db->query("UPDATE " . DB_PREFIX . "product SET price='".$NET_PRICE."' WHERE product_id='".$product_id."'");
-                
-                
+		//UPDATE PRICE for 22 Carat
+		
+			
+		$updateQuery="UPDATE " . DB_PREFIX . "product SET price=round((gold_weight * ".$gold_rate.")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE product_id='".$product_id."'";
+			
+		$this->db->query($updateQuery);
+		
+	
                 
                 
 		if (isset($data['product_filter'])) {
@@ -157,7 +163,7 @@ class ModelCatalogProduct extends Model {
 	}
 	
 	public function editProduct($product_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW(),gold_carat='".$data['gold_carat']."',gold_weight='".$data['gold_weight']."',diamond_price='".$data['diamond_price']."' WHERE product_id = '" . (int)$product_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW(),gold_carat='".$data['gold_carat']."',gold_weight='".$data['gold_weight']."',diamond_price='".$data['diamond_price']."',stone_price='".$data['stone_price']."',making_charges='".$data['making_charges']."',saph_price='".$data['saph_price']."',eme_price='".$data['eme_price']."',ruby_price='".$data['ruby_price']."',sgl_cert_no='".$data['sgl_cert_no']."',mfg_code='".$data['mfg_code']."',entry_no='".$data['entry_no']."' WHERE product_id = '" . (int)$product_id . "'");
 
                 
                 /*
@@ -279,12 +285,15 @@ class ModelCatalogProduct extends Model {
                 /*
                  * Net price calculation
                  */
-                $GOLD_PRICE=$gold_rate*$data['gold_weight'];
-                $MAN_CHARGE=($GOLD_PRICE*$mancharges['man_charge_per'])/100;
-                $MAN_CHARGE=($MAN_CHARGE>$mancharges['man_charge_min'])?$MAN_CHARGE:$mancharges['man_charge_min'];
-                
-                $NET_PRICE=$GOLD_PRICE+$MAN_CHARGE+$data['diamond_price'];
+//                $GOLD_PRICE=$gold_rate*$data['gold_weight'];
+//                $MAN_CHARGE=($GOLD_PRICE*$mancharges['man_charge_per'])/100;
+//                $MAN_CHARGE=($MAN_CHARGE>$mancharges['man_charge_min'])?$MAN_CHARGE:$mancharges['man_charge_min'];
+//                
+//                $NET_PRICE=$GOLD_PRICE+$MAN_CHARGE+$data['diamond_price'];
 		//$this->db->query("UPDATE " . DB_PREFIX . "product SET price='".$NET_PRICE."' WHERE product_id='".$product_id."'");
+                $updateQuery="UPDATE " . DB_PREFIX . "product SET price=round((gold_weight * ".$gold_rate.")+making_charges+stone_price+diamond_price+ruby_price+eme_price+saph_price) WHERE product_id='".$product_id."'";
+			
+		$this->db->query($updateQuery);
                 
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_filter WHERE product_id = '" . (int)$product_id . "'");

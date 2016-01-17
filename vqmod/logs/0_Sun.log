@@ -1,0 +1,14 @@
+---------- Date: 2016-01-17 07:43:38 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /pccindia/
+MOD DETAILS:
+   modFile   : E:\xampp\htdocs\pccindia\vqmod/xml/show_filters_from_products_not_categories_include_sub_cats.xml
+   id        : Show Filters from Products not Categories Include Sub Cats in Filter Module
+   version   : 1.0
+   vqmver    : 2.4.1
+   author    : www.best-byte.com
+
+File Name    : catalog/model/catalog/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
+----------------------------------------------------------------------
+
+

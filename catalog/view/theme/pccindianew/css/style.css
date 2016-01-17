@@ -405,10 +405,10 @@ border-right: 1px solid #EEEEEE;
 border-radius: 7px 7px 0px 0px;*/}
 header #cart.active .content {display: block;}
 
-.mini-cart-info table {border-collapse: collapse;width: 100%;margin-bottom: 5px;}
+.mini-cart-info table {border-collapse: collapse;width: 100%;margin-bottom: 5px; }
 .mini-cart-info td {color: #000;vertical-align: top;padding: 10px 5px;border-bottom: 1px solid #EEEEEE;}
 .mini-cart-info .image {width: 1px;}
-.mini-cart-info .image img {border: 1px solid #EEEEEE;text-align: left;}
+.mini-cart-info .image img {border: 1px solid #EEEEEE;text-align: left; max-width:auto !important;}
 .mini-cart-info .name small {color: #666;}
 .mini-cart-info .quantity {text-align: right;}
 .mini-cart-info td.total {text-align: right;}
