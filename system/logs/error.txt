@@ -61,3 +61,44 @@
 2016-01-13 18:08:38 - PHP Notice:  Trying to get property of non-object in E:\xampp\htdocs\pccindia\system\config\wsdl.class.php on line 44
 2016-01-13 18:10:17 - PHP Notice:  Undefined variable: client in E:\xampp\htdocs\pccindia\system\config\wsdl.class.php on line 44
 2016-01-13 18:10:17 - PHP Notice:  Trying to get property of non-object in E:\xampp\htdocs\pccindia\system\config\wsdl.class.php on line 44
+2016-01-13 18:25:44 - PHP Notice:  Undefined variable: success in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_list.tpl on line 31
+2016-01-13 18:25:44 - PHP Notice:  Undefined variable: error_warning in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_list.tpl on line 34
+2016-01-13 18:28:50 - PHP Notice:  Undefined variable: success in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_list.tpl on line 31
+2016-01-13 18:28:50 - PHP Notice:  Undefined variable: error_warning in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_list.tpl on line 34
+2016-01-13 18:28:53 - PHP Notice:  Undefined variable: success in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\transaction.tpl on line 29
+2016-01-13 18:28:53 - PHP Notice:  Undefined variable: error_warning in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\transaction.tpl on line 32
+2016-01-13 18:29:02 - PHP Notice:  Undefined variable: success in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_list.tpl on line 31
+2016-01-13 18:29:02 - PHP Notice:  Undefined variable: error_warning in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_list.tpl on line 34
+2016-01-13 18:29:07 - PHP Notice:  Undefined variable: success in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_info.tpl on line 31
+2016-01-13 18:29:07 - PHP Notice:  Undefined variable: error_warning in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_info.tpl on line 34
+2016-01-13 18:29:07 - PHP Notice:  unserialize() [<a href='function.unserialize'>function.unserialize</a>]: Error at offset 0 of 972 bytes in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_info.tpl on line 64
+2016-01-13 18:29:07 - PHP Notice:  Uninitialized string offset: 0 in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\account\order_info.tpl on line 66
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 11
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 12
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 13
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 14
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 15
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: HTTPS in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 28
+2016-01-17 6:01:39 - PHP Notice:  Undefined index: HTTPS in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 44
+2016-01-17 6:01:39 - PHP Notice:  Undefined variable: action in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 168
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: sub_cat_found in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\category.tpl on line 40
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 11
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 12
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 13
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 14
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: price_search in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 15
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: HTTPS in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 28
+2016-01-17 6:04:33 - PHP Notice:  Undefined index: HTTPS in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 44
+2016-01-17 6:04:33 - PHP Notice:  Undefined variable: action in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\module\customsearch.tpl on line 168
+2016-01-17 6:05:34 - PHP Notice:  Undefined variable: content_bottom in E:\xampp\htdocs\pccindia\catalog\view\theme\pccindianew\template\product\categorysearch.tpl on line 114
