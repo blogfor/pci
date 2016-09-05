@@ -6,12 +6,13 @@
 </style>
 
 
+<div class="hr1 margin-top"><!-- Divider --></div>
 
  <!-- Start breadcrumb  -->
 <section>
     <div class="container">
-        <div class="row"> 
-
+        <div class="row">
+            
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <ol class="breadcrumb">
                     <?php foreach ($breadcrumbs as $breadcrumb) { ?>

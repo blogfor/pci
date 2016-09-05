@@ -45,7 +45,7 @@
     </tr>
     <tr>
       <td><span id="shipping-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-      <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" /></td>
+      <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" id="shipping-address-postcode"/></td>
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_country; ?></td>
@@ -128,4 +128,49 @@ $('#shipping-address select[name=\'country_id\']').bind('change', function() {
 });
 
 $('#shipping-address select[name=\'country_id\']').trigger('change');
+
+
+$('#shipping-address-postcode').bind('blur', function() {
+	if (this.value == '') return;
+	$.ajax({
+		url: 'index.php?route=checkout/checkout/pincode&code=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+                    
+                    $('.warning, .error').remove();
+                    $('#button-guest-shipping').hide();
+			$('#shipping-address-postcode').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+                        
+		},			
+		success: function(json) {
+			if (json['status'] == '1') {
+				
+                             $('#button-guest-shipping').show();
+			} else {
+				BootstrapDialog.show({
+                                title: 'Oops! Sorry, we are currently unable to deliver in your area',
+                                message: 'Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                            $('#shipping-address-postcode').val('');
+                             $('#button-guest-shipping').show();
+			}
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
 //--></script>

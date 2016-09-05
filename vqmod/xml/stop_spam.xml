@@ -1,0 +1,115 @@
+<modification>
+    <id>Stop Spam</id>
+    <version>0</version>
+    <vqmver>2.2</vqmver>
+    <author>Welford Media</author>
+    <file name="catalog/controller/account/register.php">
+        <operation>
+            <search position="after"><![CDATA[
+                function validate() {
+            ]]></search>
+            <add><![CDATA[
+                if ($this->config->get('config_stop_spam_enable') == 1 && $this->config->get('config_use_account_register') == 1) {
+                    $this->load->model('stop_spam/stop_spam');
+                    $spammer = $this->model_stop_spam_stop_spam->checkForSpammer($this->request->post['email']);
+
+                    if ($spammer) {
+                        $this->error['warning'] = $this->language->get('error_spammer');
+                    }
+                }
+            ]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/information/contact.php">
+        <operation>
+            <search position="after"><![CDATA[
+                function validate() {
+            ]]></search>
+            <add><![CDATA[
+                if ($this->config->get('config_stop_spam_enable') == 1 && $this->config->get('config_use_contact') == 1) {
+                    $this->load->model('stop_spam/stop_spam');
+                    $spammer = $this->model_stop_spam_stop_spam->checkForSpammer($this->request->post['email']);
+
+                    if ($spammer) {
+                        $this->error['name'] = $this->language->get('error_spammer');
+                    }
+                }
+            ]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/checkout/register.php">
+        <operation>
+            <search position="after" index="1"><![CDATA[
+                if (!$json) {
+            ]]></search>
+            <add><![CDATA[
+                if ($this->config->get('config_stop_spam_enable') == 1 && $this->config->get('config_use_checkout_register') == 1) {
+                    $this->load->model('stop_spam/stop_spam');
+                    $spammer = $this->model_stop_spam_stop_spam->checkForSpammer($this->request->post['email']);
+
+                    if ($spammer) {
+                        $json['error']['warning'] = $this->language->get('error_spammer');
+                    }
+                }
+            ]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/checkout/guest.php">
+        <operation>
+            <search position="after" index="1"><![CDATA[
+                if (!$json) {
+            ]]></search>
+            <add><![CDATA[
+                if ($this->config->get('config_stop_spam_enable') == 1 && $this->config->get('config_use_checkout_guest') == 1) {
+                    $this->load->model('stop_spam/stop_spam');
+                    $spammer = $this->model_stop_spam_stop_spam->checkForSpammer($this->request->post['email']);
+
+                    if ($spammer) {
+                        $json['error']['warning'] = $this->language->get('error_spammer');
+                    }
+                }
+            ]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/product/product.php">
+        <operation>
+            <search position="before" offset="1"><![CDATA[
+                $json['error'] = $this->language->get('error_rating');
+            ]]></search>
+            <add><![CDATA[
+                if ($this->config->get('config_stop_spam_enable') == 1 && $this->config->get('config_use_reviews') == 1) {
+                    $this->load->model('stop_spam/stop_spam');
+                    $spammer = $this->model_stop_spam_stop_spam->checkForSpammer();
+
+                    if ($spammer) {
+                       $json['error'] = $this->language->get('error_spammer');
+                    }
+                }
+            ]]></add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/account/register.php">
+        <operation>
+            <search position="after"><![CDATA[<?php]]></search>
+            <add><![CDATA[$_['error_spammer']       = 'You have been detected as a spammer!';]]></add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/checkout/checkout.php">
+        <operation>
+            <search position="after"><![CDATA[<?php]]></search>
+            <add><![CDATA[$_['error_spammer']       = 'You have been detected as a spammer!';]]></add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/product/product.php">
+        <operation>
+            <search position="after"><![CDATA[<?php]]></search>
+            <add><![CDATA[$_['error_spammer']       = 'You have been detected as a spammer!';]]></add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/information/contact.php">
+        <operation>
+            <search position="after"><![CDATA[<?php]]></search>
+            <add><![CDATA[$_['error_spammer']       = 'You have been detected as a spammer!';]]></add>
+        </operation>
+    </file>
+</modification>	

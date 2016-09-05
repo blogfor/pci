@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using vQModerator's XML Generator by The Wizard of Osch for http://www.crystalcopy.nl //-->
+<!-- (Based on vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk) //-->
+<modification>
+	<id><![CDATA[Set timezone for php and database]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.3]]></vqmver>
+	<author><![CDATA[Maulik Gandhi]]></author>
+	<file name="admin/view/template/setting/setting.tpl">
+		<operation error="log" info="">
+			<search position="before"><![CDATA[echo $footer;]]></search>
+			<add><![CDATA[<style type="text/css">
+/* beautiful CSS dates - Kroc Camen - camendesign.com
+   creative commons 3.0 attribution. share + remix this, just include "Kroc Camen" and/or "camendesign.com" in your CSS */
+/* ======================================================================================================================= */
+
+a.date		{display: block; position: relative; width: 80px; margin-bottom: 18px;
+				 border: 1px solid #888885; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+/* day */			 font: 24px/35px "Helvetica Neue", Arial, sans-serif; text-align: center;
+				 letter-spacing: 2px; text-decoration: none; color: #666;
+				 background: #fcfcfc}
+a.date sup		/* lift the suffix, so that the number is fully centered */
+				{position: absolute; padding-top: 4px;
+				 font-size: 10px; line-height: 10px; letter-spacing: normal;}
+
+/* year + month */
+a.date abbr		{display: block; font: 10px Verdana, sans-serif; letter-spacing: normal; color: white;
+				 -moz-border-radius-topright: 5px; -webkit-border-top-right-radius: 5px;}
+/* month */
+a.date>:first-child	{width: 70px; margin: -1px 0 0 -1px; padding: 0 5px; border: 1px solid #832a28;
+				 line-height: 16px; text-align: left; text-transform: uppercase;
+				 background: #a33537 url("images/date-month-bg.png") repeat-x bottom left;}
+/* year */
+a.date sup+abbr	{position: absolute; top: 0; left: 0; width: 72px; padding: 0 3px;
+				 border: 1px solid #a33537; border-bottom: 1px solid #832a28;
+				 line-height: 14px; color: #eaa; text-align: right;}
+/* time */
+a.date sub		{display: block; height: 20px; border-top: 1px solid #bbd; margin: 0 3px; color: #000;
+				 font: 11px/16px Verdana, sans-serif; letter-spacing: normal; text-align: center;}
+
+
+/* ======================================================================================================================= */
+</style>
+<?php
+$timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+$config_timezone = isset($this->request->post["config_timezone"]) ? $this->request->post["config_timezone"] : $this->config->get("config_timezone");
+$timezone_options = "";
+foreach ($timezones as $t) $timezone_options .= "<option value='$t' " . ($t == $config_timezone ? "selected" : "") . ">$t</option>";
+$db_time = "Database time: " . $this->db->query("SELECT NOW() AS now")->row["now"];
+$php_time = "PHP time:     " . date("Y-m-d H:i:s");
+?>
+<script type="text/javascript">
+content = "<tr>";
+content += "  <td>Timezone:</td>";
+content += "  <td><select name='config_timezone'>";
+content += "    <option value=''>Select</option><?php echo $timezone_options; ?>";
+content += "  </select><br>"
+content += "   <div><br/><a class='date'><abbr><?php echo date('M'); ?></abbr> <?php echo date('d'); ?><sup>th</sup> <abbr><?php echo date('Y'); ?></abbr>";
+content += "		<sub><?php echo date('h:i:s A'); ?></sub></a><div><?php echo $php_time; ?></div><div><?php echo $db_time; ?></div></td>";
+content += "</tr>";
+ 
+$("#tab-server table").prepend(content);
+</script>
+
+      ]]></add>
+		</operation>
+	</file>
+	<file name="system/startup.php">
+		<operation error="log" info="">
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[$db = new mysqli(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key`='config_timezone'");
+if ($query->num_rows) {
+  $timezone = $query->fetch_assoc();
+  if (!empty($timezone["value"])) date_default_timezone_set($timezone["value"]);
+}
+      ]]></add>
+		</operation>
+	</file>
+	<file name="system/library/db.php">
+		<operation error="log" info="">
+			<search position="after"><![CDATA[function query]]></search>
+			<add><![CDATA[$now = new DateTime();
+$mins = $now->getOffset() / 60;
+$sgn = ($mins < 0 ? -1 : 1);
+$mins = abs($mins);
+$hrs = floor($mins / 60);
+$mins -= $hrs * 60;
+$offset = sprintf('%+d:%02d', $hrs*$sgn, $mins);
+$this->driver->query("SET time_zone='$offset'");
+]]></add>
+		</operation>
+	</file>
+</modification>

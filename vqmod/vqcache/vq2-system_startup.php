@@ -106,4 +106,11 @@ require_once(VQMod::modCheck(DIR_SYSTEM . 'library/play.php'));
 require_once(VQMod::modCheck(DIR_SYSTEM . 'library/ebay.php'));
 require_once(VQMod::modCheck(DIR_SYSTEM . 'library/amazon.php'));
 require_once(VQMod::modCheck(DIR_SYSTEM . 'library/amazonus.php'));
+$db = new mysqli(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key`='config_timezone'");
+if ($query->num_rows) {
+  $timezone = $query->fetch_assoc();
+  if (!empty($timezone["value"])) date_default_timezone_set($timezone["value"]);
+}
+      
 ?>

@@ -224,6 +224,7 @@
 			$product_total = $this->model_catalog_product->getTotalProducts($data);
 								
 			$results = $this->model_catalog_product->getProducts($data);
+			
 					
 			foreach ($results as $result) {
 				if ($result['image']) {
@@ -255,21 +256,24 @@
 				} else {
 					$rating = false;
 				}
+				
 			
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
-					'product_model'  => $result['model'],
+					'product_model'  => $result['model'],	
+					'quantity'	  => $result['quantity'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,
-					'rating'      => $result['rating'],
+					'rating'      => $result['rating'],					
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 				);
 			}
+			
 					
 			$url = '';
 			

@@ -92,7 +92,7 @@
             <tr>
                 <td><?php echo $entry_price; ?></td>
                 <td>
-                    <input type="text" name="price" value="<?php echo $price; ?>" id="price" />
+                    <input type="text" name="price" value="<?php echo $price; ?>" id="price" readonly />
                     <font style="color: red;">No need to put the price here price will be calculated automatically.</font>
                 
                 </td>
@@ -239,6 +239,55 @@
               <td>Diamond Price</td>
               <td>
                   <input value="<?php echo $diamond_price;?>" type="text" name="diamond_price" id="diamond_price" /></td>
+            </tr>
+            <tr>
+              <td>Stone Price</td>
+              <td>
+                  <input value="<?php echo $stone_price;?>" type="text" name="stone_price" id="stone_price" /></td>
+            </tr>
+            
+            <tr>
+              <td>Making Charges</td>
+              <td>
+                  <input value="<?php echo $making_charges;?>" type="text" name="making_charges" id="making_charges" /></td>
+            </tr>
+            
+            <tr>
+              <td>Sapphire Price</td>
+              <td>
+                  <input value="<?php echo $saph_price;?>" type="text" name="saph_price" id="saph_price" /></td>
+            </tr>
+             <tr>
+              <td>EME Price</td>
+              <td>
+                  <input value="<?php echo $eme_price;?>" type="text" name="eme_price" id="eme_price" /></td>
+            </tr>
+            <tr>
+              <td>Ruby Price</td>
+              <td>
+                  <input value="<?php echo $ruby_price;?>" type="text" name="ruby_price" id="ruby_price" /></td>
+            </tr>
+             <tr>
+              <td>SGL CERTIFICATE</td>
+              <td>
+                  <input value="<?php echo $sgl_cert_no;?>" type="text" name="sgl_cert_no" id="sgl_cert_no" /></td>
+            </tr>
+            
+            <tr>
+              <td>SGL CERTIFICATE</td>
+              <td>
+                  <input value="<?php echo $sgl_cert_no;?>" type="text" name="sgl_cert_no" id="sgl_cert_no" /></td>
+            </tr>
+            <tr>
+              <td>Manufacturer Code</td>
+              <td>
+                  <input value="<?php echo $mfg_code;?>" type="text" name="mfg_code" id="mfg_code" /></td>
+            </tr>
+            
+            <tr>
+              <td>Entry No</td>
+              <td>
+                  <input value="<?php echo $entry_no;?>" type="text" name="entry_no" id="entry_no" /></td>
             </tr>
           </table>
         </div>

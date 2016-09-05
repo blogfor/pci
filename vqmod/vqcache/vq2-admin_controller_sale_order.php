@@ -387,7 +387,8 @@ $this->data['export'] = $this->url->link('sale/order/export', 'token=' . $this->
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
 				'status'        => $result['status'],
-                                'logistics_id'  => $result['logistics_id'],
+                'logistics_id'  => $result['logistics_id'],
+				'response_text'  => $result['response_text'],	
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
@@ -926,6 +927,14 @@ $this->data['button_export'] = $this->language->get('button_export');
 			$this->data['logistics_id'] = $order_info['logistics_id'];
 		} else {
       		$this->data['logistics_id'] = '';
+    	}
+		
+		if (isset($this->request->post['response_text'])) {
+      		$this->data['response_text'] = $this->request->post['response_text'];
+    	} elseif (!empty($order_info)) { 
+			$this->data['response_text'] = $order_info['response_text'];
+		} else {
+      		$this->data['response_text'] = '';
     	}
         
 		if (isset($this->request->post['order_status_id'])) {
@@ -1605,6 +1614,12 @@ $this->data['button_export'] = $this->language->get('button_export');
 			} else {
 				$this->data['invoice_no'] = '';
 			}
+                        
+                        if ($order_info['pan']) {
+				$this->data['pan'] = $order_info['pan'];
+			} else {
+				$this->data['pan'] = 'N/A';
+			}
 			
             $this->data['amazon_order_id'] = $order_info['amazon_order_id'];
 			$this->data['store_name'] = $order_info['store_name'];
@@ -1703,6 +1718,8 @@ $this->data['button_export'] = $this->language->get('button_export');
 			$this->data['shipping_zone'] = $order_info['shipping_zone'];
 			$this->data['shipping_zone_code'] = $order_info['shipping_zone_code'];
 			$this->data['shipping_country'] = $order_info['shipping_country'];
+                        
+                        $this->data['logistics_id'] = $order_info['logistics_id'];
 
 			$this->data['products'] = array();
 

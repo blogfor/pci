@@ -10,6 +10,8 @@
 	class ControllerCommonHeader extends Controller {
 	protected function index() {
 		$this->data['title'] = $this->document->getTitle();
+		$this->data['config_maintenance'] =$this->config->get('config_maintenance');
+		$this->data['config_golive'] =$this->config->get('config_golive');
 		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$server = $this->config->get('config_ssl');

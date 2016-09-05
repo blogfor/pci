@@ -1,0 +1,43 @@
+---------- Date: 2016-09-02 12:54:38 ~ IP : 117.194.27.77 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-09-02 12:54:54 ~ IP : 117.194.27.77 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-09-02 16:15:27 ~ IP : 122.163.20.200 ----------
+REQUEST URI : /admin/index.php?route=sale/return&amp;token=abce29a727d71154c41faa0bec8a7618
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/irsfree_sales_section_export_excel.xml
+   id        : Export Excel : Sales 
+   version   : 1.0
+   vqmver    : 2.3.2 +
+   author    : IRS
+
+File Name    : admin/view/template/sale/return_list.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a>
+
+----------------------------------------------------------------------
+
+

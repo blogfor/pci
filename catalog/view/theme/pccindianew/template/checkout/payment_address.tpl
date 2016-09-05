@@ -65,7 +65,7 @@
     </tr>
     <tr>
       <td><span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-      <td><input type="text" name="postcode" value="" class="large-field" /></td>
+      <td><input type="text" name="postcode" value="" class="large-field" id="payment-address-postcode"/></td>
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_country; ?></td>
@@ -151,4 +151,49 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 });
 
 $('#payment-address select[name=\'country_id\']').trigger('change');
+
+$('#payment-address-postcode').bind('blur', function() {
+	if (this.value == '') return;
+	$.ajax({
+		url: 'index.php?route=checkout/checkout/pincode&code=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+                    
+                    $('.warning, .error').remove();
+                    $('#button-guest').hide();
+			$('#payment-address-postcode').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+                        
+		},			
+		success: function(json) {
+			if (json['status'] == '1') {
+				
+                             $('#button-guest').show();
+			} else {
+				BootstrapDialog.show({
+                                title: 'Oops! Sorry, we are currently unable to deliver in your area',
+                                message: 'Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                            $('#payment-address-postcode').val('');
+                             $('#button-guest').show();
+			}
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
 //--></script>

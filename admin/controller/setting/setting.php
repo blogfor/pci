@@ -153,6 +153,8 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_mail'] = $this->language->get('tab_mail');
 		$this->data['tab_fraud'] = $this->language->get('tab_fraud');
 		$this->data['tab_server'] = $this->language->get('tab_server');
+		
+		$this->data['config_golive'] = $this->language->get('config_golive');		
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -379,6 +381,14 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_fax'] = $this->config->get('config_fax');
 		}
+		
+		if (isset($this->request->post['config_golive'])) {
+			$this->data['config_golive'] = $this->request->post['config_golive'];
+		} else {
+			$this->data['config_golive'] = $this->config->get('config_golive');
+		}
+		
+		
 
 		if (isset($this->request->post['config_title'])) {
 			$this->data['config_title'] = $this->request->post['config_title'];

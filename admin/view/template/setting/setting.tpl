@@ -63,6 +63,20 @@
               <td><?php echo $entry_fax; ?></td>
               <td><input type="text" name="config_fax" value="<?php echo $config_fax; ?>" /></td>
             </tr>
+            
+            <tr>
+              <td>Go Live the website</td>
+              <td>
+              
+                <input type="radio" name="config_golive" value="1" <?php if($config_golive==1) echo "checked='checked'"; ?> /> Yes
+                <input type="radio" name="config_golive" value="0" <?php if($config_golive==0 || empty($config_golive)) echo "checked='checked'"; ?> /> No
+              </td>
+            </tr>
+            
+             
+               
+              
+            
           </table>
         </div>
         <div id="tab-store">
@@ -1007,7 +1021,7 @@
           <table class="form">
                
             <tr>
-              <td>Gold Rate 15 Carat</td>
+              <td>Gold Rate 14 Carat</td>
               <td><input type="text" name="gd_15_rate" value="<?php echo $gd_15_rate; ?>" />
                 </td>
             </tr>

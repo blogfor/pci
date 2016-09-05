@@ -483,7 +483,9 @@ class ModelSaleOrder extends Model {
 				'accept_language'         => $order_query->row['accept_language'],					
 				'date_added'              => $order_query->row['date_added'],
 				'date_modified'           => $order_query->row['date_modified'],
-                'logistics_id'            => $order_query->row['logistics_id'],
+                                'logistics_id'            => $order_query->row['logistics_id'],
+				'response_text'            => $order_query->row['response_text'],
+                                'pan'            => $order_query->row['pan'],
 			);
 		} else {
 			return false;
@@ -506,7 +508,7 @@ LEFT JOIN " . DB_PREFIX . "order_status oos ON (o.order_status_id = oos.order_st
 
 	}
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id,o.logistics_id,CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT o.order_id,o.logistics_id,o.response_text,CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
 
 		if (isset($data['filter_order_status_id']) && !is_null($data['filter_order_status_id'])) {
 			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
@@ -648,6 +650,27 @@ LEFT JOIN " . DB_PREFIX . "order_status oos ON (o.order_status_id = oos.order_st
 		return $query->row['total'];
 	}
 
+
+				public function getTotalOrderByDay() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND DATE(date_added) = DATE(NOW())");
+					return $query->row['total'];
+				}
+	
+				public function getTotalOrderByWeek() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND WEEK(date_added) = WEEK(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+	
+				public function getTotalOrderByMonth() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND MONTH(date_added) = MONTH(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+	
+				public function getTotalOrderByYear() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND YEAR(date_added) = YEAR(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+			
 	public function getTotalOrdersByStoreId($store_id) {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE store_id = '" . (int)$store_id . "'");
 
@@ -660,6 +683,12 @@ LEFT JOIN " . DB_PREFIX . "order_status oos ON (o.order_status_id = oos.order_st
 		return $query->row['total'];
 	}
 
+
+				public function getPendingOrders() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id =  '1'");
+					return $query->row['total'];
+				}
+			
 	public function getTotalOrdersByLanguageId($language_id) {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE language_id = '" . (int)$language_id . "' AND order_status_id > '0'");
 
@@ -678,6 +707,22 @@ LEFT JOIN " . DB_PREFIX . "order_status oos ON (o.order_status_id = oos.order_st
 		return $query->row['total'];
 	}
 
+
+				public function getTotalSalesByDay($day) {
+					$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND DATE(date_added) = DATE(NOW())");
+					return $query->row['total'];
+				}
+						
+				public function getTotalSalesByWeek($week) {
+					$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND WEEK(date_added) = WEEK(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+				
+				public function getTotalSalesByMonth($month) {
+					$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND MONTH(date_added) = MONTH(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+			
 	public function getTotalSalesByYear($year) {
       	$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND YEAR(date_added) = '" . (int)$year . "'");
 

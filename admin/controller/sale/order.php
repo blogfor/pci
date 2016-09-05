@@ -1557,6 +1557,12 @@ class ControllerSaleOrder extends Controller {
 			} else {
 				$this->data['invoice_no'] = '';
 			}
+                        
+                        if ($order_info['pan']) {
+				$this->data['pan'] = $order_info['pan'];
+			} else {
+				$this->data['pan'] = 'N/A';
+			}
 			
             $this->data['amazon_order_id'] = $order_info['amazon_order_id'];
 			$this->data['store_name'] = $order_info['store_name'];
@@ -1655,6 +1661,8 @@ class ControllerSaleOrder extends Controller {
 			$this->data['shipping_zone'] = $order_info['shipping_zone'];
 			$this->data['shipping_zone_code'] = $order_info['shipping_zone_code'];
 			$this->data['shipping_country'] = $order_info['shipping_country'];
+                        
+                        $this->data['logistics_id'] = $order_info['logistics_id'];
 
 			$this->data['products'] = array();
 

@@ -1,8 +1,5 @@
 <?php echo $header; ?>
 
-
-
-
 <!-- Start breadcrumb  -->
 <section>
     <div class="container">
@@ -64,19 +61,13 @@
                             <div class="buttons">
                                 <div class="right"><a href="<?php echo $continue; ?>" class="btn"><?php echo $button_continue; ?></a></div>
                             </div>
-
-
                         </div>
-
                         <?php echo $content_bottom; ?> 
-
-
                     </div>
                 </div><!-- end form  -->
 
                 <!-- Divider -->
                 <div class="hr1" style="margin-bottom:30px;"></div>
-
 
             </div>
 

@@ -83,7 +83,7 @@
 <br />
 <br />
 <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?><br />
-<input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" />
+<input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" id="pay-register-address-postcode"/>
 <br />
 <br />
 <span class="required">*</span> <?php echo $entry_country; ?><br />
@@ -222,6 +222,52 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 });
 
 $('#payment-address select[name=\'country_id\']').trigger('change');
+
+
+$('#pay-register-address-postcode').bind('blur', function() {
+	if (this.value == '') return;
+	$.ajax({
+		url: 'index.php?route=checkout/checkout/pincode&code=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+                    
+                    $('.warning, .error').remove();
+                    $('#button-register').hide();
+			$('#pay-register-address-postcode').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+                        
+		},			
+		success: function(json) {
+			if (json['status'] == '1') {
+				
+                             $('#button-register').show();
+			} else {
+				BootstrapDialog.show({
+                                title: 'Oops! Sorry, we are currently unable to deliver in your area',
+                                message: 'Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                            $('#pay-register-address-postcode').val('');
+                             $('#button-register').show();
+			}
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
 //--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({

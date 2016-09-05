@@ -5,6 +5,7 @@ class ControllerCommonHome extends Controller {
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
 		$this->data['heading_title'] = $this->config->get('config_title');
+		$this->data['config_golive'] =$this->config->get('config_golive');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';
@@ -22,6 +23,13 @@ class ControllerCommonHome extends Controller {
 		);
 										
 		$this->response->setOutput($this->render());
+	}
+	
+	public function change()
+	{
+		//$this->load->model('checkout/order');
+		//$this->model_checkout_order->update();
+		//mysql_query("UPDATE  `pcc_settings` SET value=1 WHERE key = 'config_golive' ");
 	}
 }
 ?>

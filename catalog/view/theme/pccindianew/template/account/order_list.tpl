@@ -42,22 +42,35 @@
 
 
                         <div class="page_content">                
-
+							<table class="order_list" style="width:100%">                            
                             <?php if ($orders) { ?>
+                            <tr>
+                            <td class="thead">&nbsp;<b><?php echo $text_order_id; ?></b> </td>
+                            <td class="thead"><b><?php echo $text_status; ?></b> </td>
+                            <td class="thead"><b><?php echo $text_date_added; ?></b> </td>
+                            <td class="thead"><b><?php echo $text_products; ?></b> </td>
+                            <td class="thead"><b><?php echo $text_customer; ?></b> </td>
+                            <td class="thead"> <b><?php echo $text_total; ?></b>  </td>
+                            <td class="thead"> <b> Action </b></td>
+                            </tr>
+                            <tbody>
                             <?php foreach ($orders as $order) { ?>
-                            <div class="order-list">
-                                <div class="order-id"><b><?php echo $text_order_id; ?></b> #<?php echo $order['order_id']; ?></div>
-                                <div class="order-status"><b><?php echo $text_status; ?></b> <?php echo $order['status']; ?></div>
-                                <div class="order-content">
-                                    <div><b><?php echo $text_date_added; ?></b> <?php echo $order['date_added']; ?><br />
-                                        <b><?php echo $text_products; ?></b> <?php echo $order['products']; ?></div>
-                                    <div><b><?php echo $text_customer; ?></b> <?php echo $order['name']; ?><br />
-                                        <b><?php echo $text_total; ?></b> <?php echo $order['total']; ?></div>
-                                    <div class="order-info"><a href="<?php echo $order['href']; ?>"><img src="catalog/view/theme/default/image/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a>&nbsp;&nbsp;<a href="<?php echo $order['reorder']; ?>"><img src="catalog/view/theme/default/image/reorder.png" alt="<?php echo $button_reorder; ?>" title="<?php echo $button_reorder; ?>" /></a></div>
-                                </div>
-                            </div>
+                            <tr>
+                            <td class="tbody"> &nbsp;<?php echo $order['order_id']; ?></td>
+                            <td class="tbody"><?php echo $order['status']; ?></td>
+                            <td class="tbody"><?php echo $order['date_added']; ?> </td>
+                            <td class="tbody"> <?php echo $order['products']; ?> </td>
+                            <td class="tbody"><?php echo $order['name']; ?> </td>
+                            <td class="tbody"><?php echo $order['total']; ?> </td>
+                            <td class="tbody"><a href="<?php echo $order['href']; ?>"><img src="catalog/view/theme/default/image/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a>&nbsp;&nbsp;
+                            <a href="<?php echo $order['reorder']; ?>"><img src="catalog/view/theme/default/image/reorder.png" alt="<?php echo $button_reorder; ?>" title="<?php echo $button_reorder; ?>" /></a> </td>
+                            </tr>
                             <?php } ?>
+                            </tbody>
+                            </table>
+                            
                             <div class="pagination"><?php echo $pagination; ?></div>
+                            
                             <?php } else { ?>
                             <div class="content"><?php echo $text_empty; ?></div>
                             <?php } ?>

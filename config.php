@@ -1,27 +1,27 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/pccindia/');
+define('HTTP_SERVER', 'https://pcchandraindiaonline.com/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/pccindia/');
+define('HTTPS_SERVER', 'https://pcchandraindiaonline.com/');
 
 // DIR
-define('DIR_APPLICATION', 'E:\xampp\htdocs\pccindia/catalog/');
-define('DIR_SYSTEM', 'E:\xampp\htdocs\pccindia/system/');
-define('DIR_DATABASE', 'E:\xampp\htdocs\pccindia/system/database/');
-define('DIR_LANGUAGE', 'E:\xampp\htdocs\pccindia/catalog/language/');
-define('DIR_TEMPLATE', 'E:\xampp\htdocs\pccindia/catalog/view/theme/');
-define('DIR_CONFIG', 'E:\xampp\htdocs\pccindia/system/config/');
-define('DIR_IMAGE', 'E:\xampp\htdocs\pccindia/image/');
-define('DIR_CACHE', 'E:\xampp\htdocs\pccindia/system/cache/');
-define('DIR_DOWNLOAD', 'E:\xampp\htdocs\pccindia/download/');
-define('DIR_LOGS', 'E:\xampp\htdocs\pccindia/system/logs/');
+define('DIR_APPLICATION', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/catalog/');
+define('DIR_SYSTEM', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/system/');
+define('DIR_DATABASE', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/system/database/');
+define('DIR_LANGUAGE', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/catalog/language/');
+define('DIR_TEMPLATE', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/catalog/view/theme/');
+define('DIR_CONFIG', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/system/config/');
+define('DIR_IMAGE', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/image/');
+define('DIR_CACHE', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/system/cache/');
+define('DIR_DOWNLOAD', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/download/');
+define('DIR_LOGS', '/nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/system/logs/');
 
 // DB
 define('DB_DRIVER', 'mysql');
-define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'pccindia');
+define('DB_HOSTNAME', 'internal-db.s186571.gridserver.com');
+define('DB_USERNAME', 'db186571_ecom');
+define('DB_PASSWORD', 'EcommercePCC@2015@#$');
+define('DB_DATABASE', 'db186571_pcc_db15');
 define('DB_PREFIX', 'pcc_');
 ?>

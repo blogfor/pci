@@ -1,5 +1,12 @@
 <?php
-class ModelCheckoutOrder extends Model {	
+class ModelCheckoutOrder extends Model {
+	
+//	public function update()
+//	{
+//			$this->db->query("UPDATE  `" . DB_PREFIX . "settings` SET value=1 WHERE key = 'config_golive' ");
+//
+//	}
+	
 	public function addOrder($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET invoice_prefix = '" . $this->db->escape($data['invoice_prefix']) . "', store_id = '" . (int)$data['store_id'] . "', store_name = '" . $this->db->escape($data['store_name']) . "', store_url = '" . $this->db->escape($data['store_url']) . "', customer_id = '" . (int)$data['customer_id'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', payment_firstname = '" . $this->db->escape($data['payment_firstname']) . "', payment_lastname = '" . $this->db->escape($data['payment_lastname']) . "', payment_company = '" . $this->db->escape($data['payment_company']) . "', payment_company_id = '" . $this->db->escape($data['payment_company_id']) . "', payment_tax_id = '" . $this->db->escape($data['payment_tax_id']) . "', payment_address_1 = '" . $this->db->escape($data['payment_address_1']) . "', payment_address_2 = '" . $this->db->escape($data['payment_address_2']) . "', payment_city = '" . $this->db->escape($data['payment_city']) . "', payment_postcode = '" . $this->db->escape($data['payment_postcode']) . "', payment_country = '" . $this->db->escape($data['payment_country']) . "', payment_country_id = '" . (int)$data['payment_country_id'] . "', payment_zone = '" . $this->db->escape($data['payment_zone']) . "', payment_zone_id = '" . (int)$data['payment_zone_id'] . "', payment_address_format = '" . $this->db->escape($data['payment_address_format']) . "', payment_method = '" . $this->db->escape($data['payment_method']) . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', shipping_firstname = '" . $this->db->escape($data['shipping_firstname']) . "', shipping_lastname = '" . $this->db->escape($data['shipping_lastname']) . "', shipping_company = '" . $this->db->escape($data['shipping_company']) . "', shipping_address_1 = '" . $this->db->escape($data['shipping_address_1']) . "', shipping_address_2 = '" . $this->db->escape($data['shipping_address_2']) . "', shipping_city = '" . $this->db->escape($data['shipping_city']) . "', shipping_postcode = '" . $this->db->escape($data['shipping_postcode']) . "', shipping_country = '" . $this->db->escape($data['shipping_country']) . "', shipping_country_id = '" . (int)$data['shipping_country_id'] . "', shipping_zone = '" . $this->db->escape($data['shipping_zone']) . "', shipping_zone_id = '" . (int)$data['shipping_zone_id'] . "', shipping_address_format = '" . $this->db->escape($data['shipping_address_format']) . "', shipping_method = '" . $this->db->escape($data['shipping_method']) . "', shipping_code = '" . $this->db->escape($data['shipping_code']) . "', comment = '" . $this->db->escape($data['comment']) . "', total = '" . (float)$data['total'] . "', affiliate_id = '" . (int)$data['affiliate_id'] . "', commission = '" . (float)$data['commission'] . "', language_id = '" . (int)$data['language_id'] . "', currency_id = '" . (int)$data['currency_id'] . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', ip = '" . $this->db->escape($data['ip']) . "', forwarded_ip = '" .  $this->db->escape($data['forwarded_ip']) . "', user_agent = '" . $this->db->escape($data['user_agent']) . "', accept_language = '" . $this->db->escape($data['accept_language']) . "', date_added = NOW(), date_modified = NOW()");
 
@@ -149,7 +156,11 @@ class ModelCheckoutOrder extends Model {
 				'user_agent'              => $order_query->row['user_agent'],	
 				'accept_language'         => $order_query->row['accept_language'],				
 				'date_modified'           => $order_query->row['date_modified'],
-				'date_added'              => $order_query->row['date_added']
+				'date_added'              => $order_query->row['date_added'],
+				'logistics_id'            => $order_query->row['logistics_id'],
+				'response_text'           => $order_query->row['response_text'],
+				'pan'           => $order_query->row['pan']
+				
 			);
 		} else {
 			return false;	
@@ -158,9 +169,10 @@ class ModelCheckoutOrder extends Model {
 
 	public function confirm($order_id, $order_status_id, $comment = '', $notify = false) {
 		$order_info = $this->getOrder($order_id);
-		 
-		if ($order_info && !$order_info['order_status_id']) {
-			// Fraud Detection
+		
+		//if ($order_info && !$order_info['order_status_id']) {
+		if ($order_info && $order_info['order_status_id']>0) {	
+		 	// Fraud Detection
 			if ($this->config->get('config_fraud_detection')) {
 				$this->load->model('checkout/fraud');
 				
@@ -170,6 +182,7 @@ class ModelCheckoutOrder extends Model {
 					$order_status_id = $this->config->get('config_fraud_status_id');
 				}
 			}
+			
 
 			// Ban IP
 			$status = false;
@@ -245,6 +258,10 @@ class ModelCheckoutOrder extends Model {
 				}
 			}
 			
+			
+			
+			
+			
 			// Send out order confirmation mail
 			$language = new Language($order_info['language_directory']);
 			$language->load($order_info['language_filename']);
@@ -306,6 +323,10 @@ class ModelCheckoutOrder extends Model {
 			$template->data['email'] = $order_info['email'];
 			$template->data['telephone'] = $order_info['telephone'];
 			$template->data['ip'] = $order_info['ip'];
+			
+			
+			$template->data['response_text']=$order_info['response_text'];
+			
 			
 			if ($comment && $notify) {
 				$template->data['comment'] = nl2br($comment);
@@ -422,6 +443,7 @@ class ModelCheckoutOrder extends Model {
 				);
 			}
 	
+	
 			$template->data['totals'] = $order_total_query->rows;
 			
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/order.tpl')) {
@@ -429,6 +451,8 @@ class ModelCheckoutOrder extends Model {
 			} else {
 				$html = $template->fetch('default/template/mail/order.tpl');
 			}
+			
+			
             
             // Can not send confirmation emails for CBA orders as email is unknown
             $this->load->model('payment/amazon_checkout');
@@ -488,7 +512,8 @@ class ModelCheckoutOrder extends Model {
                 }
 
                 $text .= $language->get('text_new_footer') . "\n\n";
-
+				
+			
                 $mail = new Mail();
                 $mail->protocol = $this->config->get('config_mail_protocol');
                 $mail->parameter = $this->config->get('config_mail_parameter');
@@ -551,6 +576,29 @@ class ModelCheckoutOrder extends Model {
 					$text .= $language->get('text_new_comment') . "\n\n";
 					$text .= $order_info['comment'] . "\n\n";
 				}
+				
+					
+				$text .="Shipping Address: \n\n";
+				$text .="Name: ".$order_info['shipping_firstname'].' '.$order_info['shipping_lastname'] . "\n";
+				$text .='Company: '.$order_info['shipping_company'] . "\n";
+				$text .='Address : '.$order_info['shipping_address_1'] . "\n";
+				$text .=' '.$order_info['shipping_address_2'] . "\n";
+				$text .='City: '. $order_info['shipping_city'] . "\n";
+				$text .='Pin Code: '.$order_info['shipping_postcode'] . "\n";
+				$text .='State : '. $order_info['shipping_zone'] . "\n";
+				$text .='State Code: '.$order_info['shipping_zone_code'] . "\n";
+				$text .='Country: '.$order_info['shipping_country'] . "\n\n\n";  
+				
+				$text .="Payment Address: \n\n";
+				$text .="Name: ".$order_info['payment_firstname'].' '.$order_info['payment_lastname'] . "\n";
+				$text .='Company: '.$order_info['payment_company'] . "\n";
+				$text .='Address : '.$order_info['payment_address_1'] . "\n";
+				$text .=' '.$order_info['payment_address_2'] . "\n";
+				$text .='City: '. $order_info['payment_city'] . "\n";
+				$text .='Pin Code: '.$order_info['payment_postcode'] . "\n";
+				$text .='State : '. $order_info['payment_zone'] . "\n";
+				$text .='State Code: '.$order_info['payment_zone_code'] . "\n";
+				$text .='Country: '.$order_info['payment_country'] . "\n";
 			
 				$mail = new Mail(); 
 				$mail->protocol = $this->config->get('config_mail_protocol');
@@ -677,6 +725,13 @@ class ModelCheckoutOrder extends Model {
 		}
 	}
 	
+        public function updatePan($order_id,$pan)
+        {
+            
+            $this->db->query("UPDATE " . DB_PREFIX . "order
+ SET pan='" . $this->db->escape($pan) . "' WHERE order_id = '" . (int)$order_id . "'");
+        }
+        
 	public function setresponse($order_id,$response){		
 		$response_data=base64_encode(serialize($response));
 		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET response_text = '".$response_data."', date_modified = NOW(),order_status_id='2' WHERE order_id = '".(int)$order_id."'");

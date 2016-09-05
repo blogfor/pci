@@ -162,6 +162,11 @@
             <td><?php echo $text_date_modified; ?></td>
             <td><?php echo $date_modified; ?></td>
           </tr>
+          
+          <tr>
+            <td>PAN</td>
+            <td><?php echo $pan; ?></td>
+          </tr>
         </table>
       </div>
       <div id="tab-payment" class="vtabs-content">
@@ -301,6 +306,68 @@
             <td><?php echo $shipping_method; ?></td>
           </tr>
           <?php } ?>
+          
+           <tr>
+            <td>Shipping Tracking Details </td>
+            <td>
+                <?php require_once(DIR_CONFIG.'wsdl.class.php');?>
+<?php
+if($logistics_id!='') {
+$wsdlOBJ = new wsdl_call_base();
+$params = array(
+         'strMapCode' => "PCCGEM",
+          'strDocs' => "'".$logistics_id."'",
+          'strTrackType'=>"D",	
+);
+
+$ShippingDetails = $wsdlOBJ->wsdl_return_val("TrackDoc",$params);
+
+$ShippingDetails=$ShippingDetails['TrackDocResult']['NewDataSet'];
+
+echo '<strong>Docket ID: </strong>'.$ShippingDetails['trackheader']['DocketID'].'<br/>';
+echo '<strong>Docket NO: </strong>'.$ShippingDetails['trackheader']['DocketNO'].'<br/>';
+echo '<strong>Pick Up Date: </strong>'.$ShippingDetails['trackheader']['PickUpDate'].'<br/>';
+echo '<strong>Order NO: </strong>'.$ShippingDetails['trackheader']['OrderNO'].'<br/>';
+echo '<strong>Expected Delivery Date: </strong>'.$ShippingDetails['trackheader']['ExpectedDelDate'].'<br/>';
+echo '<strong>Consignor Name: </strong>'.$ShippingDetails['trackheader']['ConsignorName'].'<br/>';
+echo '<strong>Consignor City:</strong>'.$ShippingDetails['trackheader']['ConsignorCity'].'<br/>';
+echo '<strong>Consignee Name: </strong>'.$ShippingDetails['trackheader']['ConsigneeName'].'<br/>';
+echo '<strong>Consignee City: </strong>'.$ShippingDetails['trackheader']['ConsigneeCity'].'<br/>';
+echo '<strong>Delivery Date Time: </strong>'.$ShippingDetails['trackheader']['DelDateTime'].'<br/>';
+
+echo '<strong>Del Rec By:</strong>'.$ShippingDetails['trackheader']['DelRecBy'].'<br/>';
+echo '<strong>XDMPODFLAG: </strong>'.$ShippingDetails['trackheader']['XDMPODFLAG'].'<br/>';
+echo '<strong>Consignor City: </strong>'.$ShippingDetails['trackheader']['CngrCity'].'<br/>';
+echo '<strong>Consignor PIN: </strong>'.$ShippingDetails['trackheader']['CngrPIN'].'<br/>';
+echo '<strong>Consignor Address: </strong>'.$ShippingDetails['trackheader']['ConsignorAddress'].'<br/>';
+
+echo '<strong>Consignee City: </strong>'.$ShippingDetails['trackheader']['CnsgCity'].'<br/>';
+echo '<strong>Consignee PIN: </strong>'.$ShippingDetails['trackheader']['CnsgPIN'].'<br/>';
+echo '<strong>Consignee Address: </strong>'.$ShippingDetails['trackheader']['ConsigneeAddress'].'<br/>';
+
+echo '<strong>FLAG: </strong>'.$ShippingDetails['trackheader']['FLAG'].'<br/>';
+
+echo '<strong><u>Tracking Details</u></strong>'.'<br/>';
+
+echo '<table border="1" width="100%">';
+echo '<tr><td>Docket ID</td><td>Date:</td><td>Time: </td><td>Event: </td><td>Location: </td><td>Description: </td><td>SEQ: </td></tr>';
+foreach($ShippingDetails['trackdetail'] as $trackdeatils)
+{
+echo '<tr>';
+echo '<td>'.$trackdeatils['DocketID'].'</td>';
+echo '<td>'.$trackdeatils['EventDate'].'</td>';
+echo '<td>'.$trackdeatils['EventTime'].'</td>';
+echo '<td>'.$trackdeatils['Event'].'</td>';
+echo '<td>'.$trackdeatils['EventLocation'].'</td>';
+echo '<td>'.$trackdeatils['EventDescription'].'</td>';
+echo '<td>'.$trackdeatils['SEQ'].'<br/>';
+echo '</tr>';
+}
+echo '</table>';
+}
+?></td>
+          </tr>
+          
         </table>
       </div>
       <?php } ?>

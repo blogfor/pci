@@ -281,14 +281,16 @@
                         $this->data['gold_weight'] = $product_info['gold_weight'];
 			 $this->data['MAN_CHARGE'] = $product_info['MAN_CHARGE'];
                           $this->data['GOLD_PRICE'] = $product_info['GOLD_PRICE'];
-                        
-			if ($product_info['quantity'] <= 0) {
+			   
+			if ((int)$product_info['quantity'] > 0) {
 				$this->data['stock'] = $product_info['stock_status'];
 			} elseif ($this->config->get('config_stock_display')) {
 				$this->data['stock'] = $product_info['quantity'];
 			} else {
-				$this->data['stock'] = $this->language->get('text_instock');
+				//$this->data['stock'] = $this->language->get('text_instock');
+				$this->data['stock'] = $this->language->get('text_outstock');
 			}
+			$this->data['product_stock'] =$product_info['quantity'];
 			
 			$this->load->model('tool/image');
 

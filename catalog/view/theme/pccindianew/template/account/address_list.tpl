@@ -45,7 +45,7 @@
 
                             <h2><?php echo $text_address_book; ?></h2>
                             <?php foreach ($addresses as $result) { ?>
-                            <div class="content">
+                            <div class="content address-row">
                                 <table style="width: 100%;">
                                     <tr>
                                         <td><?php echo $result['address']; ?></td>
@@ -54,6 +54,7 @@
                                 </table>
                             </div>
                             <?php } ?>
+                            <div class="hr1" style="margin-bottom:30px;"></div>
                             <div class="buttons">
                                 <div class="left"><a href="<?php echo $back; ?>" class="btn"><?php echo $button_back; ?></a></div>
                                 <div class="right"><a href="<?php echo $insert; ?>" class="btn"><?php echo $button_new_address; ?></a></div>

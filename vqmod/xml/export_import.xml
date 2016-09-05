@@ -1,6 +1,6 @@
 <modification>
 	<id>Export/Import Tool for OpenCart 1.5.x</id>
-	<version>1.5.x-2.26</version>
+	<version>1.5.x-2.29</version>
 	<vqmver>2.4.1</vqmver>
 	<author>mhccorp.com</author>
 	<file name="admin/controller/common/header.php">
@@ -13,7 +13,7 @@
 			<add><![CDATA[			$this->data['export_import'] = $this->url->link('tool/export_import', 'token=' . $this->session->data['token'], 'SSL');]]></add>
 		</operation>
 	</file>
-	<file name="admin/language/english/common/header.php">
+	<file name="admin/language/*/common/header.php">
 		<operation>
 			<search position="after"><![CDATA[$_['text_backup']]]></search>
 			<add><![CDATA[$_['text_export_import']           = 'Export / Import';]]></add>

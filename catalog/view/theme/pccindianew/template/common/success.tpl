@@ -36,6 +36,7 @@
                         <div class="page_content">
 
                             <?php echo $text_message; ?>
+                            <!--<p style="font-weight:bold;font-size:12px;line-height:18px;">Keep handy your address & ID proof at the time of delivery for verification</p>-->
                             <div class="buttons">
                                 <div class="right"><a href="<?php echo $continue; ?>" class="btn"><?php echo $button_continue; ?></a></div>
                             </div>
@@ -61,6 +62,5 @@
     </div>     
 
 </section>
-
 
 <?php echo $footer; ?>

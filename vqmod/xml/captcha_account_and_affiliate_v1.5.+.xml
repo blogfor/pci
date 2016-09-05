@@ -1,0 +1,208 @@
+<modification>
+
+	<id>Captcha register and affiliate v1.5.1.3</id>
+	<version>1.0.1</version>
+	<vqmver>2.1.2</vqmver>
+	<author>LeorLindel</author>
+	<file name="catalog/controller/account/register.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[
+    	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
+			]]></search>
+			<add><![CDATA[
+		$this->data['text_captcha'] = $this->language->get('text_captcha');
+
+		$this->data['entry_captcha'] = $this->language->get('entry_captcha');
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="before"><![CDATA[
+		if ($this->config->get('config_account_id')) {
+			]]></search>
+			<add><![CDATA[
+ 		if (isset($this->error['captcha'])) {
+			$this->data['error_captcha'] = $this->error['captcha'];
+		} else {
+			$this->data['error_captcha'] = '';
+		}
+
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="before"><![CDATA[
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {
+			]]></search>
+			<add><![CDATA[
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}
+		
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/affiliate/register.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[
+    	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
+			]]></search>
+			<add><![CDATA[
+		$this->data['text_captcha'] = $this->language->get('text_captcha');
+
+		$this->data['entry_captcha'] = $this->language->get('entry_captcha');
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="before"><![CDATA[
+		if ($this->config->get('config_affiliate_id')) {
+			]]></search>
+			<add><![CDATA[
+ 		if (isset($this->error['captcha'])) {
+			$this->data['error_captcha'] = $this->error['captcha'];
+		} else {
+			$this->data['error_captcha'] = '';
+		}
+
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="before"><![CDATA[
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/register.tpl')) {
+			]]></search>
+			<add><![CDATA[
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}
+		
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/account/register.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Text
+			]]></search>
+			<add><![CDATA[
+$_['text_captcha']			= 'Verification';
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Entry
+			]]></search>
+			<add><![CDATA[
+$_['entry_captcha']  = 'Enter the code in the box below:';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/affiliate/register.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Text
+			]]></search>
+			<add><![CDATA[
+$_['text_captcha']         	= 'Verification';
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Entry
+			]]></search>
+			<add><![CDATA[
+$_['entry_captcha']  = 'Enter the code in the box below:';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/french/account/register.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Text
+			]]></search>
+			<add><![CDATA[
+$_['text_captcha']         	= 'Verification';
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Entry
+			]]></search>
+			<add><![CDATA[
+$_['entry_captcha']			= 'Saisir le code ci-dessous :';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/french/affiliate/register.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Text
+			]]></search>
+			<add><![CDATA[
+$_['text_captcha']			= 'Verification';
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after"><![CDATA[
+// Entry
+			]]></search>
+			<add><![CDATA[
+$_['entry_captcha']			= 'Saisir le code ci-dessous :';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/default/template/account/register.tpl">
+		<operation error="abort">
+			<search position="before"><![CDATA[
+    <?php if ($text_agree) { ?>
+			]]></search>
+			<add><![CDATA[
+    <h2><?php echo $text_captcha; ?></h2>
+    <div class="content">
+      <table class="form">
+        <tr>
+		  <tr>
+            <td><?php echo $entry_captcha; ?><br />
+              <input type="text" name="captcha" value="<?php echo $captcha; ?>" />
+              <?php if ($error_captcha) { ?>
+              <span class="error"><?php echo $error_captcha; ?></span>
+              <?php } ?>
+              <br />
+              <img src="index.php?route=information/contact/captcha" />
+			</td>
+          </tr>
+        </tr>
+      </table>
+    </div>
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/default/template/affiliate/register.tpl">
+		<operation error="abort">
+			<search position="before"><![CDATA[
+    <?php if ($text_agree) { ?>
+			]]></search>
+			<add><![CDATA[
+    <h2><?php echo $text_captcha; ?></h2>
+    <div class="content">
+      <table class="form">
+        <tr>
+		  <tr>
+            <td><?php echo $entry_captcha; ?><br />
+              <input type="text" name="captcha" value="<?php echo $captcha; ?>" />
+              <?php if ($error_captcha) { ?>
+              <span class="error"><?php echo $error_captcha; ?></span>
+              <?php } ?>
+              <br />
+              <img src="index.php?route=information/contact/captcha" />
+			</td>
+          </tr>
+        </tr>
+      </table>
+    </div>
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

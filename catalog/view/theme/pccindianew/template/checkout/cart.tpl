@@ -137,7 +137,7 @@
         <td><label for="use_reward"><?php echo $text_use_reward; ?></label></td>
       </tr>
       <?php } ?>
-      <?php if ($shipping_status) { ?>
+      <?php /*if ($shipping_status) { ?>
       <tr class="highlight ">
         <td><?php if ($next == 'shipping') { ?>
           <input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
@@ -146,7 +146,7 @@
           <?php } ?></td>
         <td><label for="shipping_estimate"><?php echo $text_shipping_estimate; ?></label></td>
       </tr>
-      <?php } ?>
+      <?php }*/ ?>
     </table>
     </div>
   </div>

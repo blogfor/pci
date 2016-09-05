@@ -13,8 +13,8 @@
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a href="<?php echo $export; ?>" class="button"><?php echo $button_export; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <h1><img src="view/image/flat-image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
+      <div class="buttons"><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('#form').submit();" class="button delete"><?php echo $button_delete; ?></a></div>
     </div>
     <div class="content">
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -104,7 +104,7 @@
               <td class="left"><?php echo $return['date_added']; ?></td>
               <td class="left"><?php echo $return['date_modified']; ?></td>
               <td class="right"><?php foreach ($return['action'] as $action) { ?>
-                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                <a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>

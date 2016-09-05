@@ -1,0 +1,70 @@
+---------- Date: 2016-08-31 09:29:33 ~ IP : 203.201.224.132 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-31 09:35:34 ~ IP : 117.205.7.115 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-31 12:38:38 ~ IP : 182.156.80.106 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-31 20:20:41 ~ IP : 103.218.238.187 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-31 20:21:24 ~ IP : 103.218.238.187 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+

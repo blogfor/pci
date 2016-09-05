@@ -1,14 +1,28 @@
----------- Date: 2016-01-07 17:01:26 ~ IP : 127.0.0.1 ----------
-REQUEST URI : /pccindia/
+---------- Date: 2016-09-01 15:42:25 ~ IP : 182.156.80.106 ----------
+REQUEST URI : /index.php?route=checkout/cart
 MOD DETAILS:
-   modFile   : E:\xampp\htdocs\pccindia\vqmod/xml/show_filters_from_products_not_categories_include_sub_cats.xml
-   id        : Show Filters from Products not Categories Include Sub Cats in Filter Module
-   version   : 1.0
-   vqmver    : 2.4.1
-   author    : www.best-byte.com
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
 
-File Name    : catalog/model/catalog/category.php(0)
-VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-09-01 21:32:07 ~ IP : 119.235.54.130 ----------
+REQUEST URI : /index.php?route=checkout/cart
+MOD DETAILS:
+   modFile   : /nfs/c06/h05/mnt/186571/domains/pcchandraindiaonline.com/html/vqmod/xml/remove_coupon_voucher.xml
+   id        : recommendation
+   version   : 1.1.x and 1.5.x
+   vqmver    : 1.5.6
+   author    : vqmod.com
+
+File Name    : catalog/view/theme/*/template/checkout/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <td class="right"><?php echo $total['text']; ?></td>
 ----------------------------------------------------------------------
 
 

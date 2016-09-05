@@ -424,6 +424,26 @@ $('#button-payment-address').live('click', function() {
 				if (json['error']['zone']) {
 					$('#payment-address select[name=\'zone_id\']').after('<span class="error">' + json['error']['zone'] + '</span>');
 				}
+                                
+                                if (json['error']['postcodeout']) {
+					$('#shipping-address-postcode').after('<span class="error">' + json['error']['postcodeout'] + '</span>');
+                                        BootstrapDialog.show({
+                                title: 'Oops! Sorry, we are currently unable to deliver in your area',
+                                message: 'Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                                        $('#shipping-address-postcode').val('');
+                                        
+				}
+                                
 			} else {
 				<?php if ($shipping_required) { ?>
 				$.ajax({
@@ -814,6 +834,26 @@ $('#button-guest-shipping').live('click', function() {
 				if (json['error']['zone']) {
 					$('#shipping-address select[name=\'zone_id\']').after('<span class="error">' + json['error']['zone'] + '</span>');
 				}
+                                
+                                if (json['error']['postcodeout']) {
+					$('#shipping-address-postcode').after('<span class="error">' + json['error']['postcodeout'] + '</span>');
+                                        BootstrapDialog.show({
+                                title: 'Oops! Sorry, we are currently unable to deliver in your area',
+                                message: 'Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                                        $('#shipping-address-postcode').val('');
+                                        
+				}
+                                
 			} else {
 				$.ajax({
 					url: 'index.php?route=checkout/shipping_method',

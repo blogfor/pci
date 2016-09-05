@@ -1,0 +1,1563 @@
+<modification>
+<id>Flat Admin</id>
+<version>2.0.0</version>
+<vqmver>2.x.x</vqmver>
+<author>ThemeBooster.com</author>
+
+	<!-- Language Strings -->
+	<file name="admin/language/english/common/home.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[
+			$_['text_logged_home']                      = 'Welcome %s!';
+			$_['text_menu_statistics']                  = 'Sales Statistics';
+			$_['text_new_customers']             = 'Total Customers';
+			$_['text_new_reviews']             = 'Awaiting Reviews';
+			$_['text_year_sale']             = 'Sales This Year';
+			$_['text_today_sale']             = 'Sales Today';
+			$_['text_month_sale']             = 'Sales This Month';
+			$_['text_week_sale']             = 'Sales This Week';
+			$_['text_pending_orders']             = 'Pending Orders';
+			$_['text_pending_orders_evidence']             = 'New Pending Orders: click to view!';
+			$_['text_orders']             = 'Total Orders';
+			$_['text_new_affiliates']             = 'Awaiting Affiliates';
+			$_['text_awaiting_customers']             = 'Awaiting Customer';
+			$_['text_approval_customers_evidence']             = 'New Awaiting Customers: click to view!';
+			$_['text_view']             = 'View now';
+			$_['text_view_all']             = 'View all';
+			$_['text_jump_to_statistics']             = 'Jump to Statistics';
+			$_['viewed_products_title']             = '5 Most Viewed Products';
+			$_['bestsellers_title']             = 'Top 5 Products';
+			$_['top_customers_title']             = 'Top 5 Customers';
+			$_['top_coupon_title']             = 'Top 5 Coupons';
+			$_['item']             = ' item sold';
+			$_['items']             = ' items sold';
+			$_['time']             = ' time';
+			$_['times']             = ' times';
+			$_['number_order']             = ' order';
+			$_['number_orders']             = ' orders';
+			$_['star_rating']             = ' star';
+			$_['stars_rating']             = ' stars';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/*/*.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[
+			$_['text_pending_orders_evidence']             = 'New Pending Orders: click to view!';
+			$_['text_approval_customers_evidence']             = 'New Awaiting Customers: click to view!';
+			
+			]]></add>
+		</operation>
+	</file>
+	
+	
+	<!-- DO NOT edit after this line (do at your risk)  -->
+
+	<!-- Login -->
+	<file name="admin/view/template/common/login.tpl">
+		<operation error="skip">
+			<search position="replace" offset="42"><![CDATA[<div class="box" style="width: 400px; min-height: 300px; margin-top: 40px; margin-left: auto; margin-right: auto;">]]></search>
+			<add><![CDATA[
+			<div class="box" id="admin-login">
+			<h1><?php echo $text_login; ?></h1>
+				<?php if ($success) { ?>
+				<div class="success"><?php echo $success; ?></div>
+				<?php } ?>
+				<?php if ($error_warning) { ?>
+				<div class="warning"><?php echo $error_warning; ?></div>
+				<?php } ?>
+			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+			<p>
+			<label for="username"><?php echo $entry_username; ?></label>
+			<input class="username" type="text" name="username" value="<?php echo $username; ?>" />
+			</p>
+			<p>
+			<label for="password"><?php echo $entry_password; ?></label>
+			<input class="password" type="password" name="password" value="<?php echo $password; ?>" />
+			</p>
+			<a onclick="$('#form').submit();" class="button"><?php echo $button_login; ?></a>
+			
+			<?php if ($forgotten) { ?>
+			<p><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></p>
+            <?php } ?>
+			
+			<?php if ($redirect) { ?>
+			<input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
+			<?php } ?>
+			</form>
+		</div>
+	</div>
+			]]></add>
+		</operation>
+	</file>
+	
+	
+	<!-- Forgotten Password -->
+	<file name="admin/view/template/common/forgotten.tpl">
+		<operation error="skip">
+			<search position="replace" offset="20"><![CDATA[<?php if ($error_warning) { ?>]]></search>
+			<add><![CDATA[
+			<div class="box" id="admin-login">
+			<h1><?php echo $heading_title; ?></h1>
+				<?php if ($error_warning) { ?>
+				<div class="warning"><?php echo $error_warning; ?></div>
+				<?php } ?>
+			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="forgotten">
+			<p>
+			<label for="email"><?php echo $text_email; ?></label>
+			<input class="email" type="text" name="email" value="<?php echo $email; ?>" />
+			</p>
+			<p>
+			<a onclick="$('#forgotten').submit();" class="button"><?php echo $button_reset; ?></a> <a href="<?php echo $cancel; ?>" class="button cancel"><?php echo $button_cancel; ?></a>
+			</p>
+			</form>
+		</div>
+	</div>
+			]]></add>
+		</operation>
+	</file>
+
+	
+	<!-- Admin Logo -->
+	<file name="admin/controller/common/header.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->data['direction'] = $this->language->get('direction');]]></search>
+			<add><![CDATA[$this->data['name'] = $this->config->get('config_name');
+			
+			$this->load->model('sale/customer');
+
+			$this->data['total_customer'] = $this->model_sale_customer->getTotalCustomers();
+			$this->data['total_customer_approval'] = $this->model_sale_customer->getTotalCustomersAwaitingApproval();
+			
+			$this->data['text_pending_orders_evidence'] = $this->language->get('text_pending_orders_evidence');
+			$this->data['text_approval_customers_evidence'] = $this->language->get('text_approval_customers_evidence');
+
+			$url = '';
+
+			if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
+				$this->data['logged'] = '';
+
+				$this->data['home'] = $this->url->link('common/login', '', 'SSL');
+				} else {
+			
+			$this->data['link_to_sale'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['link_to_customers'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			
+			}
+	
+			]]></add>
+		</operation>	
+	</file>
+	
+
+	<!-- Replace stylesheet.css + Logo -->
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />]]></search>
+			<add><![CDATA[<link rel="stylesheet" type="text/css" href="view/stylesheet/flat-stylesheet.css" />]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="after"><![CDATA[<div class="div2"><img src="view/image/logo.png" title="<?php echo $heading_title; ?>" onclick="location = '<?php echo $home; ?>'" /></div>]]></search>
+			<add><![CDATA[
+			<ul id="new-messages">
+			<li <?php if ($total_pending_order > "0") { echo "class='evidence-pending'"; } ?>><a title="<?php echo $text_pending_orders_evidence; ?>" href="<?php echo $link_to_sale; ?>&filter_order_status_id=1"><span><?php echo $total_pending_order; ?></span></a></li>
+			<li <?php if ($total_customer_approval > "0") { echo "class='evidence-approval'"; } ?>><a title="<?php echo $text_approval_customers_evidence; ?>" href="<?php echo $link_to_customers; ?>&filter_approved=0"><span><?php echo $total_customer_approval; ?></span></a></li>
+			</ul>
+			]]></add>
+		</operation>
+	</file>
+	
+	
+	
+	<!-- Dashboard New Blocks -->
+	<file name="admin/controller/common/home.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->data['entry_range'] = $this->language->get('entry_range');]]></search>
+			<add><![CDATA[   $this->language->load('common/header');
+			if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
+			$this->data['logged'] = '';
+			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
+			} else {
+			$this->data['logged'] = sprintf($this->language->get('text_logged_home'), $this->user->getUserName());
+			
+			$url = '';
+			if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
+			$this->data['logged'] = '';
+
+			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
+		} else {
+			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
+			}
+			}]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="after">
+			<![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]>
+			</search>
+			<add><![CDATA[
+			$url = '';
+			$this->data['text_menu_statistics'] = $this->language->get('text_menu_statistics');
+			$this->data['menu_statistics'] = $this->url->link('report/sale_order', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['link_to_sale'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['link_to_customers'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['link_to_reviews'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['link_to_affiliates'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['link_to_coupons'] = $this->url->link('report/sale_coupon', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$this->data['text_new_customers'] = $this->language->get('text_new_customers');
+			$this->data['text_new_reviews'] = $this->language->get('text_new_reviews');
+			$this->data['text_year_sale'] = $this->language->get('text_year_sale');
+			$this->data['text_today_sale'] = $this->language->get('text_today_sale');
+			$this->data['text_week_sale'] = $this->language->get('text_week_sale');
+			$this->data['text_month_sale'] = $this->language->get('text_month_sale');
+			$this->data['text_orders'] = $this->language->get('text_orders');
+			$this->data['text_view'] = $this->language->get('text_view');
+			$this->data['text_view_all'] = $this->language->get('text_view_all');
+			$this->data['text_jump_to_statistics'] = $this->language->get('text_jump_to_statistics');
+			$this->data['viewed_products_title'] = $this->language->get('viewed_products_title');
+			$this->data['bestsellers_title'] = $this->language->get('bestsellers_title');
+			$this->data['top_customers_title'] = $this->language->get('top_customers_title');
+			$this->data['top_coupon_title'] = $this->language->get('top_coupon_title');
+			$this->data['item'] = $this->language->get('item');
+			$this->data['items'] = $this->language->get('items');
+			$this->data['time'] = $this->language->get('time');
+			$this->data['times'] = $this->language->get('times');
+			$this->data['number_order'] = $this->language->get('number_order');
+			$this->data['number_orders'] = $this->language->get('number_orders');
+			$this->data['star_rating'] = $this->language->get('star_rating');
+			$this->data['stars_rating'] = $this->language->get('stars_rating');
+
+			]]></add>
+		</operation>
+		
+		<operation error="skip"><search position="before"><![CDATA[$this->data['text_total_sale_year']]]></search>
+			<add><![CDATA[// Sales
+			$this->data['text_total_sale_today'] = $this->language->get('text_total_sale_today');
+			$this->data['text_total_sale_week'] = $this->language->get('text_total_sale_week');
+			$this->data['text_total_sale_month'] = $this->language->get('text_total_sale_month');
+			$this->data['text_pending_orders'] = $this->language->get('text_pending_orders');
+			$this->data['text_new_affiliates'] = $this->language->get('text_new_affiliates');
+			$this->data['text_awaiting_customers'] = $this->language->get('text_awaiting_customers');
+			]]></add>
+		</operation>
+		
+		<operation error="skip"><search position="before"><![CDATA[$this->data['total_sale_year']]]></search>
+			<add><![CDATA[// Sales
+			$this->data['total_sale_today'] = $this->currency->format($this->model_sale_order->getTotalSalesByDay(date('D')), $this->config->get('config_currency'));
+			$this->data['total_sale_week'] = $this->currency->format($this->model_sale_order->getTotalSalesByWeek(date('W')), $this->config->get('config_currency'));
+			$this->data['total_sale_month'] = $this->currency->format($this->model_sale_order->getTotalSalesByMonth(date('M')), $this->config->get('config_currency'));
+			$this->data['report_product_purchased'] = $this->url->link('report/product_purchased', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['report_product_viewed'] = $this->url->link('report/product_viewed', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['report_customer_order'] = $this->url->link('report/customer_order', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['review'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['coupon'] = $this->url->link('report/sale_coupon', 'token=' . $this->session->data['token'], 'SSL');
+			]]></add>
+		</operation>
+		
+		
+		<!-- Most Viewed -->
+		
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->response->setOutput($this->render());]]></search>
+			<add><![CDATA[
+			$this->language->load('report/product_viewed');
+			$this->load->model('report/product');
+			
+			$product_viewed_total = $this->model_report_product->getTotalProductsViewed($data); 
+			$product_views_total = $this->model_report_product->getTotalProductViews(); 
+
+			$results = $this->model_report_product->getProductsViewed($data);
+
+			foreach ($results as $result) {
+				if ($result['viewed']) {
+					$percent = round($result['viewed'] / $product_views_total * 100, 2);
+				} else {
+					$percent = 0;
+				}
+
+				$this->data['products'][] = array(
+					'name'    => $result['name'],
+					'model'   => $result['model'],
+					'viewed'  => $result['viewed'],
+					'percent' => $percent . '%'			
+				);
+			}
+
+			$this->data['text_no_results'] = $this->language->get('text_no_results');
+			$this->response->setOutput($this->render());
+			
+			]]></add>
+		</operation>
+		
+		
+		
+		<!-- Bestsellers -->
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->response->setOutput($this->render());]]></search>
+			<add><![CDATA[
+			$this->language->load('report/product_purchased');
+			$this->load->model('report/product');
+			
+			$product_total = $this->model_report_product->getTotalPurchased($data);
+			$results = $this->model_report_product->getPurchased($data);
+
+			foreach ($results as $result) {
+				$this->data['sellers'][] = array(
+					'name'       => $result['name'],
+					'model'      => $result['model'],
+					'quantity'   => $result['quantity'],
+					'total'      => $this->currency->format($result['total'], $this->config->get('config_currency'))
+				);
+			}
+
+			$this->load->model('localisation/order_status');
+			$this->response->setOutput($this->render());
+			
+			]]></add>
+		</operation>
+		
+		
+		
+		<!-- Best Customers -->
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->response->setOutput($this->render());]]></search>
+			<add><![CDATA[
+			$this->language->load('report/customer_order');
+			$this->load->model('report/customer');
+			
+			$this->data['customers'] = array();
+			
+			$customer_total = $this->model_report_customer->getTotalOrders($data); 
+			$results = $this->model_report_customer->getOrders($data);
+
+			foreach ($results as $result) {
+				$this->data['customers'][] = array(
+				'customer'       => $result['customer'],
+				'email'          => $result['email'],
+				'customer_group' => $result['customer_group'],
+				'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+				'orders'         => $result['orders'],
+				'products'       => $result['products'],
+				'total'          => $this->currency->format($result['total'], $this->config->get('config_currency')),
+				'action'         => $action
+				);
+			}
+
+			$this->load->model('localisation/order_status');
+			$this->response->setOutput($this->render());
+			
+			]]></add>
+		</operation>
+		
+		
+		
+		<!-- Most Returned -->
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->response->setOutput($this->render());]]></search>
+			<add><![CDATA[
+			$this->language->load('report/sale_coupon');
+			$this->load->model('report/coupon');
+			$this->data['coupons'] = array();
+			
+			$coupon_total = $this->model_report_coupon->getTotalCoupons($data); 
+		
+			$results = $this->model_report_coupon->getCoupons($data);
+	
+			foreach ($results as $result) {
+				$this->data['coupons'][] = array(
+					'name'   => $result['name'],
+					'code'   => $result['code'],
+					'orders' => $result['orders'],
+					'total'  => $this->currency->format($result['total'], $this->config->get('config_currency'))
+				);
+			}
+	
+			$this->response->setOutput($this->render());
+			
+			]]></add>
+		</operation>
+		
+	</file>
+	
+	<!-- Pending Orders -->
+	<file name="admin/controller/common/header.php">
+		<operation error="skip"><search position="before"><![CDATA[$this->data['stores'] = array();]]></search>
+			<add><![CDATA[
+			$this->language->load('sale/order');
+			$this->load->model('sale/order');
+			$this->data['total_pending_order'] = $this->model_sale_order->getPendingOrders();]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/common/home.php">
+		<operation error="skip"><search position="after"><![CDATA[$this->data['total_order'] = $this->model_sale_order->getTotalOrders();]]></search>
+			<add><![CDATA[$this->data['total_pending_order'] = $this->model_sale_order->getPendingOrders();]]></add>
+		</operation>
+	</file>
+	
+	<!-- Sale Order -->
+	<file name="admin/model/sale/order.php">
+	    <operation error="skip"><search position="before"><![CDATA[public function getTotalSalesByYear($year) {]]></search>
+			<add><![CDATA[
+				public function getTotalSalesByDay($day) {
+					$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND DATE(date_added) = DATE(NOW())");
+					return $query->row['total'];
+				}
+						
+				public function getTotalSalesByWeek($week) {
+					$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND WEEK(date_added) = WEEK(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+				
+				public function getTotalSalesByMonth($month) {
+					$query = $this->db->query("SELECT SUM(total) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND MONTH(date_added) = MONTH(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+			]]></add>
+		</operation>
+		<operation error="skip"><search position="before"><![CDATA[public function getTotalOrdersByStoreId($store_id) {]]></search>
+			<add><![CDATA[
+				public function getTotalOrderByDay() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND DATE(date_added) = DATE(NOW())");
+					return $query->row['total'];
+				}
+	
+				public function getTotalOrderByWeek() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND WEEK(date_added) = WEEK(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+	
+				public function getTotalOrderByMonth() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND MONTH(date_added) = MONTH(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+	
+				public function getTotalOrderByYear() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND YEAR(date_added) = YEAR(NOW()) AND YEAR(date_added) = YEAR(NOW())");
+					return $query->row['total'];
+				}
+			]]></add>
+		</operation>
+		
+		<operation error="skip"><search position="before"><![CDATA[public function getTotalOrdersByLanguageId]]></search>
+			<add><![CDATA[
+				public function getPendingOrders() {
+					$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id =  '1'");
+					return $query->row['total'];
+				}
+			]]></add>
+		</operation>	
+	</file>
+	
+	
+	<file name="admin/view/template/common/home.tpl">
+        <operation error="skip">
+            <search position="after"><![CDATA[<?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>]]></search>
+            <add><![CDATA[
+			<div id="breadcrumb-plus">
+			<span id="statistics"><a title="<?php echo $text_jump_to_statistics; ?>" id="link-to-statistics" href="<?php echo $home; ?>#this-year"><?php echo $text_menu_statistics; ?></a></span>
+			<span id="calendar-date"><?php echo date("F j, Y"); ?></span>
+			</div>
+            ]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>]]></search>
+            <add><![CDATA[<h1><img src="view/image/home.png" alt="" /><?php echo $heading_title; ?></h1>
+			<p><?php echo $logged; ?></p>
+			]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="before"><![CDATA[<div class="content">]]></search>
+            <add><![CDATA[
+			<div id="overview-buttons">
+			    <ul>
+					<li id="orders"><?php echo $text_orders; ?> <span><?php echo $total_order; ?></span> <a href="<?php echo $link_to_sale; ?>"><?php echo $text_view; ?></a></li>
+					<li id="sales-today"><?php echo $text_today_sale; ?><span><?php echo $total_sale_today; ?></span> <a href="<?php echo $link_to_sale; ?>&filter_date_added=<?php echo date("Y-m-d"); ?>"><?php echo $text_view; ?></a></li>
+					<li id="sales-week"><?php echo $text_week_sale; ?><span><?php echo $total_sale_week; ?></span> <a href="<?php echo $link_to_sale; ?>"><?php echo $text_view; ?></a></li>
+					<li id="sales-month"><?php echo $text_month_sale; ?><span><?php echo $total_sale_month; ?></span> <a href="<?php echo $link_to_sale; ?>"><?php echo $text_view; ?></a></li>
+					<li id="sales"><?php echo $text_year_sale; ?> <span><?php echo $total_sale_year; ?></span> <a href="<?php echo $link_to_sale; ?>"><?php echo $text_view; ?></a></li>
+					<li id="new-affiliates" <?php if ($total_affiliate_approval > 0) { echo "class='evidence'"; } ?>><?php echo $text_new_affiliates; ?> <span><?php echo $total_affiliate_approval; ?></span> <a href="<?php echo $link_to_affiliates; ?>&filter_approved=0"><?php echo $text_view; ?></a></li>
+					<li id="new-reviews" <?php if ($total_review_approval > 0) { echo "class='evidence'"; } ?>><?php echo $text_new_reviews; ?> <span><?php echo $total_review_approval; ?></span> <a href="<?php echo $link_to_reviews; ?>&sort=r.status&order=ASC"><?php echo $text_view; ?></a></li>
+					<li id="pending-orders" <?php if ($total_pending_order > 0) { echo "class='evidence'"; } ?>><?php echo $text_pending_orders; ?> <span><?php echo $total_pending_order; ?></span> <a href="<?php echo $link_to_sale; ?>&filter_order_status_id=1"><?php echo $text_view; ?></a></li>
+					<li id="awaiting-customers" <?php if ($total_customer_approval > 0) { echo "class='evidence'"; } ?>><?php echo $text_awaiting_customers; ?> <span><?php echo $total_customer_approval; ?></span> <a href="<?php echo $link_to_customers; ?>&filter_approved=0"><?php echo $text_view; ?></a></li>
+					<li id="customers"><?php echo $text_new_customers; ?> <span><?php echo $total_customer; ?></span> <a href="<?php echo $link_to_customers; ?>"><?php echo $text_view; ?></a></li>
+				</ul>
+			</div>
+			]]></add>
+        </operation>
+		
+		<operation error="skip">
+            <search position="before"><![CDATA[
+			xaxis:
+			]]></search>
+            <add><![CDATA[
+			points: { show: true },
+			]]></add>
+        </operation>
+					
+		<operation error="skip">
+            <search position="replace" offset="36"><![CDATA[
+			<div class="latest">
+			]]></search>
+            <add><![CDATA[
+			
+			<div class="additional-statistics">
+					<div class="dashboard-heading"><?php echo $bestsellers_title; ?></div>
+					<div class="dashboard-content">
+					<p><a href="<?php echo $report_product_purchased; ?>"><?php echo $text_view_all; ?></a></p>
+						<div id="bestsellers"></div>
+
+					<script type="text/javascript">
+							$(document).ready(function(){
+								var datab = [
+                                <?php $bs = "0"; if (!empty ($sellers)) { foreach($sellers as $seller) { 
+									$bs++;   
+									if($bs <= "5") {
+								?>
+								["<?php echo $seller['name'] ?> <?php echo $seller['model']; ?><span class=\"additional\"><?php echo $seller['quantity']; if ($seller['quantity'] == "1" ){ echo $item; } else { echo $items; } ?> = <?php echo $seller['total'] ?></span>", <?php echo $seller['quantity'] ?>] <?php if($bs != "5") { ?>,<?php } ?>
+										<?php } else { 
+										break; 
+										}
+									}
+								}
+								?>
+								];
+							
+									<?php if (!empty ($sellers)) { ?>
+									var plot2 = $.jqplot ('bestsellers', [datab], 
+									<?php } else { ?>
+									var plot2 = $.jqplot ('bestsellers', [[null]],
+									<?php } ?>
+			  
+									{ 
+									
+									shadow: false,
+									seriesDefaults: {
+										renderer:$.jqplot.DonutRenderer,
+										rendererOptions: {
+											sliceMargin: 1,
+											startAngle: -90,
+											showDataLabels: true,
+											shadowDepth: 0
+											}
+										}, 
+										legend: { show:true, location: 'e', xoffset: 12, },
+										grid: { shadow: false, borderWidth: 0, background:'#ffffff' },
+										seriesColors: [ "#058dc7", "#b99dc5", "#94a7b4", "#bdc197", "#a4c197", "#ed561b", "#9accc7", "#edef00", "#64e572"],
+									}
+								);
+
+						});
+						</script>
+
+					</div>		
+				</div>		
+			
+			<!-- -->
+	
+				<div class="additional-statistics" id="most-viewed-container">
+					<div class="dashboard-heading"><?php echo $viewed_products_title; ?></div>
+					<div class="dashboard-content">
+					<p><a href="<?php echo $report_product_viewed; ?>"><?php echo $text_view_all; ?></a></p>
+						<div id="most-viewed"></div>
+
+						<script type="text/javascript">
+							$(document).ready(function(){
+								var data = [
+								<?php $mv = "0"; if (!empty ($products)) { foreach ($products as $product) {
+									$mv++;   
+										if($mv <= "5") {
+										?>
+                                    ["<?php echo $product['name'] ?> <?php echo $product['model']; ?> <span class=\"additional\"><?php echo $product['viewed']; if ($product['viewed'] == "1" ){ echo $time; } else { echo $times; } ?></span>", <?php echo $product['viewed'] ?>]<?php if($mv != "5") { ?>,<?php } ?>
+								<?php } else { 
+										break; 
+										}
+									}
+								}
+								?>
+								];
+							
+							
+									<?php if (!empty ($products)) { ?>
+									var plot1 = $.jqplot ('most-viewed', [data],  
+									<?php } else { ?>
+									var plot1 = $.jqplot ('most-viewed', [[null]], 
+									<?php } ?>
+							
+									{ 
+									
+									shadow: false,
+									seriesDefaults: {
+										renderer:$.jqplot.DonutRenderer,
+										rendererOptions: {
+											sliceMargin: 1,
+											startAngle: -90,
+											showDataLabels: true,
+											shadowDepth: 0
+											}
+										}, 
+										legend: { show:true, location: 'e', xoffset: 12, },
+										grid: { shadow: false, borderWidth: 0, background:'#ffffff' },
+										seriesColors: [ "#058dc7", "#b99dc5", "#94a7b4", "#bdc197", "#a4c197", "#ed561b", "#9accc7", "#edef00", "#64e572"],
+									}
+								);
+
+						});
+						</script>
+					</div>		
+				</div>		
+
+				<!-- -->
+				
+				<div class="additional-statistics">
+					<div class="dashboard-heading"><?php echo $top_customers_title; ?></div>
+					<div class="dashboard-content">
+					<p><a href="<?php echo $report_customer_order; ?>"><?php echo $text_view_all; ?></a></p>
+						<div id="topcustomers"></div>
+
+						<script type="text/javascript">
+							$(document).ready(function(){
+								var datac = [
+								<?php $bc = "0"; if (!empty ($customers)) { foreach($customers as $customer) {
+									$bc++;   
+									if($bc <= "5") {
+									?>
+                                    ["<?php echo $customer['customer'] ?> <span class=\"additional\"><?php echo $customer['orders']; if ($customer['orders'] == "1" ){ echo $number_order; } else { echo $number_orders; }?> = <?php echo $customer['total'] ?></span>", <?php echo $customer['orders']; ?>]<?php if($bc != "5") { ?>,<?php } ?>
+									<?php } else { 
+										break; 
+										}
+									}
+								}
+							
+								?>
+                           
+								];
+							
+									<?php if (!empty ($customers)) { ?>
+									var plot3 = $.jqplot ('topcustomers', [datac],   
+									<?php } else { ?>
+									var plot3 = $.jqplot ('topcustomers', [[null]], 
+									<?php } ?>
+
+									{ 
+									
+									shadow: false,
+									seriesDefaults: {
+										renderer:$.jqplot.DonutRenderer,
+										rendererOptions: {
+											sliceMargin: 1,
+											startAngle: -90,
+											showDataLabels: true,
+											shadowDepth: 0
+											}
+										}, 
+										legend: { show:true, location: 'e', xoffset: 12, },
+										grid: { shadow: false, borderWidth: 0, background:'#ffffff' },
+										seriesColors: [ "#058dc7", "#b99dc5", "#94a7b4", "#bdc197", "#a4c197", "#ed561b", "#9accc7", "#edef00", "#64e572"],
+									}
+								);
+
+						});
+						</script>
+					</div>		
+				</div>		
+				
+				<!-- -->
+				
+				<div class="additional-statistics" id="top-coupon">
+					<div class="dashboard-heading"><?php echo $top_coupon_title; ?></div>
+					<div class="dashboard-content">
+					<p><a href="<?php echo $coupon ?>"><?php echo $text_view_all; ?></a></p>
+					<link class="include" rel="stylesheet" type="text/css" href="view/stylesheet/pie/jquery.jqplot.min.css" />
+						<div id="topcoupon"></div>
+
+						<script type="text/javascript">
+							$(document).ready(function(){
+								var datar = [
+								<?php $mr = "0"; if (!empty ($coupons)) { foreach($coupons as $coupon) {
+									$mr++;
+									if($mr <= "5") {
+									?>
+                                    ["<?php echo $coupon['name'] ?> <span class=\"additional\"><?php echo $coupon['orders']; if ($coupon['orders'] == "1" ){ echo $number_order; } else { echo $number_orders; }?> = <?php echo $coupon['total']; ?></span>", <?php echo $coupon['orders']; ?>]<?php if($mr != "5") { ?>,<?php } ?>
+									<?php } else { 
+										break; 
+										}
+									}
+								}
+								?>
+                           
+								];
+							
+									<?php if (!empty ($coupons)) { ?>
+									var plot4 = $.jqplot ('topcoupon', [datar], 
+									<?php } else { ?>
+									var plot4 = $.jqplot ('topcoupon', [[null]], 
+									<?php } ?>
+									
+			  
+									{ 
+									
+									shadow: false,
+									seriesDefaults: {
+										renderer:$.jqplot.DonutRenderer,
+										rendererOptions: {
+											sliceMargin: 1,
+											startAngle: -90,
+											showDataLabels: true,
+											shadowDepth: 0
+											}
+										}, 
+										legend: { show:true, location: 'e', xoffset: 12, },
+										grid: { shadow: false, borderWidth: 0, background:'#ffffff' },
+										seriesColors: [ "#058dc7", "#b99dc5", "#94a7b4", "#bdc197", "#a4c197", "#ed561b", "#9accc7", "#edef00", "#64e572"],
+									}
+								);
+						});
+						</script>
+						<script class="include" type="text/javascript" src="view/javascript/pie/jquery.jqplot.min.js"></script>
+						<script class="include" language="javascript" type="text/javascript" src="view/javascript/pie/jqplot.pieRenderer.min.js"></script>
+						<script class="include" language="javascript" type="text/javascript" src="view/javascript/pie/jqplot.donutRenderer.min.js"></script>
+						<script class="include" language="javascript" type="text/javascript" src="view/javascript/pie/jqplot.highlighter.min.js"></script>
+						<script class="include" language="javascript" type="text/javascript" src="view/javascript/pie/jqplot.dateAxisRenderer.min.js"></script>
+
+					</div>		
+				</div>		
+			
+			]]></add>
+        </operation>		
+					
+    </file>
+	
+	
+	<!-- Bigger Product Images -->
+	<file name="admin/controller/catalog/product.php">
+        <operation error="skip">
+            <search position="replace"><![CDATA[$image = $this->model_tool_image->resize($result['image'], 40, 40);]]></search>
+            <add><![CDATA[$image = $this->model_tool_image->resize($result['image'], 120, 120);]]></add>
+        </operation>
+	</file>
+
+	
+	<!-- Top Buttons -->
+	<file name="admin/view/template/*/*.tpl">
+		<operation error="skip">
+            <search position="replace"><![CDATA[<div class="buttons"><a href="<?php echo $repair; ?>" class="button"><?php echo $button_repair; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').submit();" class="button"><?php echo $button_delete; ?></a></div>]]></search>
+            <add><![CDATA[<div class="buttons"><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a href="<?php echo $repair; ?>" class="button repair"><?php echo $button_repair; ?></a><a onclick="$('#form').submit();" class="button delete"><?php echo $button_delete; ?></a></div>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<div class="buttons"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button"><?php echo $button_copy; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>]]></search>
+            <add><![CDATA[<div class="buttons"><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button copy"><?php echo $button_copy; ?></a><a onclick="$('#form').submit();" class="button delete"><?php echo $button_delete; ?></a></div>]]></add>
+        </operation>
+		
+		<operation error="skip">
+            <search position="replace"><![CDATA[[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+            <add><![CDATA[<a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<td class="center"><img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" style="padding: 1px; border: 1px solid #DDDDDD;" /></td>]]></search>
+            <add><![CDATA[<td class="center"><img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" /></td>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+            <add><![CDATA[<a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<div class="buttons"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>]]></search>
+            <add><![CDATA[<div class="buttons"><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('#form').submit();" class="button delete"><?php echo $button_delete; ?></a></div>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+            <add><![CDATA[<a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[[<a href="<?php echo $action['href'] ?>"><?php echo $action['name'] ?></a>]]]></search>
+            <add><![CDATA[<a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['name']; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>]]></search>
+            <add><![CDATA[<div class="buttons"><a onclick="$('#form').submit();" class="button save"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button cancel"><?php echo $button_cancel; ?></a></div>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_attribute; ?></a>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_attribute; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_remove; ?></a>]]></search>
+            <add><![CDATA[class="button delete"><?php echo $button_remove; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_option_value; ?></a>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_option_value; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_profile ?></a>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_profile ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a class="button" onclick="$('#profile]]></search>
+            <add><![CDATA[<a class="button delete" onclick="$('#profile]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a class="button" onclick="$(\'#profile-row']]></search>
+            <add><![CDATA[<a class="button delete" onclick="$(\'#profile-row']]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_discount; ?>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_discount; ?>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_special; ?>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_special; ?>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_image; ?>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_image; ?>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="image_upload]]></search>
+            <add><![CDATA[<a class="upload-image" onclick="image_upload]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[class="button"><?php echo $button_add_filter; ?>]]></search>
+            <add><![CDATA[class="button insert"><?php echo $button_add_filter; ?>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[.remove();" class="button">]]></search>
+            <add><![CDATA[.remove();" class="button delete">]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+            <add><![CDATA[<a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>]]></search>
+            <add><![CDATA[<div class="buttons"><a onclick="$('#form').submit();" class="button save"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button cancel"><?php echo $button_cancel; ?></a></div>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="addModule();" class="button">]]></search>
+            <add><![CDATA[<a onclick="addModule();" class="button insert">]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[.remove();" class="button">]]></search>
+            <add><![CDATA[.remove();" class="button delete">]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a class="button" onclick="$('#form').submit()"><span><?php echo $button_save; ?></span></a>]]></search>
+            <add><![CDATA[<a class="button save" onclick="$('#form').submit()"><span><?php echo $button_save; ?></span></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a>]]></search>
+            <add><![CDATA[<a onclick="location = '<?php echo $cancel; ?>';" class="button cancel"><span><?php echo $button_cancel; ?></span></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="image_upload]]></search>
+            <add><![CDATA[<a class="upload-image" onclick="image_upload]]></add>
+        </operation>
+			<operation error="skip">
+            <search position="replace"><![CDATA[<a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a>]]></search>
+            <add><![CDATA[<a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button delete"><?php echo $button_delete; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="addRoute();" class="button">]]></search>
+            <add><![CDATA[<a onclick="addRoute();" class="button insert">]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="addImage();" class="button">]]></search>
+            <add><![CDATA[<a onclick="addImage();" class="button insert">]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>]]></search>
+            <add><![CDATA[<a class="select-all" onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> <a class="unselect-all" onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>]]></add>
+        </operation>
+	</file>
+	
+	<!-- OpenBay Pro -->
+	<file name="admin/view/template/module/openbaypro.tpl">
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a href="<?php echo $cancel; ?>" class="button">]]></search>
+            <add><![CDATA[<a href="<?php echo $cancel; ?>" class="button cancel">]]></add>
+        </operation>
+	</file>
+	
+	<!--  Sales  -->
+	<file name="admin/view/template/sale/*.tpl">
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="$('#form').attr('action', '<?php echo $invoice; ?>'); $('#form').attr('target', '_blank'); $('#form').submit();" class="button"><?php echo $button_invoice; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $delete; ?>'); $('#form').attr('target', '_self'); $('#form').submit();" class="button"><?php echo $button_delete; ?></a>]]></search>
+            <add><![CDATA[<a onclick="$('#form').attr('action', '<?php echo $invoice; ?>'); $('#form').attr('target', '_blank'); $('#form').submit();" class="button invoice"><?php echo $button_invoice; ?></a><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $delete; ?>'); $('#form').attr('target', '_self'); $('#form').submit();" class="button delete"><?php echo $button_delete; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="document.getElementById('form').submit();" class="button"><?php echo $button_delete; ?></a>]]></search>
+            <add><![CDATA[<a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="document.getElementById('form').submit();" class="button delete"><?php echo $button_delete; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a>]]></search>
+            <add><![CDATA[<a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button approve"><?php echo $button_approve; ?></a><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button delete"><?php echo $button_delete; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a href="<?php echo $invoice; ?>" target="_blank" class="button"><?php echo $button_invoice; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>]]></search>
+            <add><![CDATA[<a href="<?php echo $invoice; ?>" target="_blank" class="button invoice"><?php echo $button_invoice; ?></a><a href="<?php echo $cancel; ?>" class="button cancel"><?php echo $button_cancel; ?></a>]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[<div class="buttons"><a id="button-send" onclick="send('index.php?route=sale/contact/send&token=<?php echo $token; ?>');" class="button"><?php echo $button_send; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>]]></search>
+            <add><![CDATA[<div class="buttons"><a id="button-send" onclick="send('index.php?route=sale/contact/send&token=<?php echo $token; ?>');" class="button send"><?php echo $button_send; ?></a><a href="<?php echo $cancel; ?>" class="button cancel"><?php echo $button_cancel; ?></a></div>]]></add>
+        </operation>
+	</file>
+	
+	<file name="admin/view/template/sale/order_list.tpl">
+		<operation error="skip">
+            <search position="replace"><![CDATA[<table class="list">]]></search>
+            <add><![CDATA[<table class="list" id="order-list">]]></add>
+        </operation>
+	</file>
+	
+	
+	<!--  Tool Backup  -->
+	<file name="admin/view/template/tool/backup.tpl">
+		<operation error="skip">
+            <search position="replace"><![CDATA[<a onclick="$('#restore').submit();" class="button"><?php echo $button_restore; ?></a><a onclick="$('#backup').submit();" class="button"><?php echo $button_backup; ?></a>]]></search>
+            <add><![CDATA[<a onclick="$('#restore').submit();" class="button restore"><?php echo $button_restore; ?></a><a onclick="$('#backup').submit();" class="button save"><?php echo $button_backup; ?></a>]]></add>
+        </operation>
+	</file>
+	
+	
+	<!-- Preload -->
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="skip">
+            <search position="after"><![CDATA[<body>]]></search>
+            <add><![CDATA[<div id="preloader"><div id="status">&nbsp;</div></div>]]></add>
+        </operation>
+	</file>
+	
+	
+	<!-- Scroll to Top + Fixed Buttons + Preloading  -->
+	<file name="admin/view/template/common/footer.tpl">
+		<operation error="skip">
+            <search position="before"><![CDATA[</body>]]></search>
+            <add><![CDATA[
+			<a href="#" class="scrollup">Scroll up</a>
+			
+			<script type="text/javascript">
+			jQuery("document").ready(function($){
+				var nav = $('.heading');
+    
+				$(window).scroll(function () {
+					if ($(this).scrollTop() > 139) {
+						nav.addClass("fixed-heading");
+					} else {
+						nav.removeClass("fixed-heading");
+					}
+				});
+				
+				
+				
+				
+				$(window).load(function() {
+					$("#status").fadeOut();
+					$("#preloader").delay(350).fadeOut("slow");
+				})
+				
+				
+				
+				
+				/* Scroll to Top */
+				$(document).ready(function(){ 
+					$(window).scroll(function(){
+						if ($(this).scrollTop() > 400) {
+							$('.scrollup').fadeIn();
+						} else {
+							$('.scrollup').fadeOut();
+						}
+					}); 
+							
+					$('.scrollup').click(function(){
+					$("html, body").animate({ scrollTop: 0 }, 1200);
+					return false;
+					});
+					
+					/**/
+					
+					$("#link-to-statistics").click(function() {
+						$('html, body').animate({
+						scrollTop: $("#this-year").offset().top -200
+						}, 1500);
+					});
+					
+					
+				});
+				
+			});
+			</script>
+			]]></add>
+        </operation>
+	</file>
+	
+	
+	<!-- Disable Overview + Multi Charts -->
+	<file name="admin/view/template/common/home.tpl">
+		<operation error="skip">
+            <search position="replace" offset="38"><![CDATA[<div class="overview">]]></search>
+            <add><![CDATA[]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace" offset="13"><![CDATA[<div class="statistic">]]></search>
+            <add><![CDATA[
+			
+			<div class="latest">
+        <div class="dashboard-heading"><?php echo $text_latest_10_orders; ?></div>
+        <div class="dashboard-content">
+          <table class="list">
+            <thead>
+              <tr>
+                <td class="right"><?php echo $column_order; ?></td>
+                <td class="left"><?php echo $column_customer; ?></td>
+                <td class="left"><?php echo $column_status; ?></td>
+                <td class="left"><?php echo $column_date_added; ?></td>
+                <td class="right"><?php echo $column_total; ?></td>
+                <td class="right"><?php echo $column_action; ?></td>
+              </tr>
+            </thead>
+            <tbody>
+              <?php if ($orders) { ?>
+              <?php foreach ($orders as $order) { ?>
+              <tr>
+                <td class="right"><?php echo $order['order_id']; ?></td>
+                <td class="left"><?php echo $order['customer']; ?></td>
+                <td class="left"><?php echo $order['status']; ?></td>
+                <td class="left"><?php echo $order['date_added']; ?></td>
+                <td class="right"><?php echo $order['total']; ?></td>
+                <td class="right"><?php foreach ($order['action'] as $action) { ?>
+                  [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                  <?php } ?></td>
+              </tr>
+              <?php } ?>
+              <?php } else { ?>
+              <tr>
+                <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+              </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+			
+			
+			
+			<div class="statistic" id="this-year">
+        <div class="range"><?php echo $text_year; ?>
+          <select id="range" onchange="getSalesChart(this.value)">
+		  <option value="year"><?php echo $text_year; ?></option>
+          </select>
+        </div>
+        <div class="dashboard-heading"><?php echo $text_statistics; ?>: <?php echo $text_year; ?></div>
+        <div class="dashboard-content">
+          <div id="report"></div>
+        </div>
+      </div>
+	  
+	  
+	  
+	  
+	  <div class="statistic" id="day-statistic">
+        <div class="range"><?php echo $text_day; ?>
+          <select id="ranged" onchange="getSalesChart(this.value)">
+		  <option value="day"><?php echo $text_day; ?></option>
+          </select>
+        </div>
+        <div class="dashboard-heading"><?php echo $text_statistics; ?>: <?php echo $text_day; ?></div>
+        <div class="dashboard-content">
+          <div id="reportd"></div>
+        </div>
+      </div>
+	  
+	  
+	  
+	  
+	  <div class="statistic" id="week-statistic">
+        <div class="range"><?php echo $text_week; ?>
+          <select id="rangew" onchange="getSalesChart(this.value)">
+		  <option value="week"><?php echo $text_week; ?></option>
+          </select>
+        </div>
+        <div class="dashboard-heading"><?php echo $text_statistics; ?>: <?php echo $text_week; ?></div>
+        <div class="dashboard-content">
+          <div id="reportw"></div>
+        </div>
+      </div>
+	  
+
+	   <div class="statistic" id="month-statistic">
+        <div class="range"><?php echo $text_month; ?>
+          <select id="rangem" onchange="getSalesChart(this.value)">
+		  <option value="month"><?php echo $text_month; ?></option>
+          </select>
+        </div>
+        <div class="dashboard-heading"><?php echo $text_statistics; ?>: <?php echo $text_month; ?></div>
+        <div class="dashboard-content">
+          <div id="reportm"></div>
+        </div>
+      </div>
+	  
+	  
+	  
+	  
+			]]></add>
+        </operation>
+		
+		
+		<operation error="skip">
+            <search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+            <add><![CDATA[
+			
+			<script type="text/javascript"><!--
+			function getSalesChart(range) {
+				$.ajax({
+					type: 'get',
+					url: 'index.php?route=common/home/chart&token=<?php echo $token; ?>&range=' + range,
+					dataType: 'json',
+					async: false,
+					success: function(json) {
+					
+						var plot = $.plot("#reportd", [json.order, json.customer],
+						{
+							series: {
+								lines: {
+									show: true,
+									fill: true,
+									lineWidth: 1
+								},
+								points: {
+									show: true
+								}
+							},
+							grid: {
+								borderWidth: 0,
+								hoverable: true,
+								clickable: true,
+								backgroundColor: '#FFF'
+							},	
+							xaxis: {
+								ticks: json.xaxis
+							}
+						});
+						
+						
+						function showTooltip(x, y, contents) {
+							$('<div id="tooltip">' + contents + '</div>').css({
+								position: 'absolute',
+								display: 'none',
+								top: y - 25,
+								left: x + 5,
+								color: '#FFF',
+								border: '1px solid #333',
+								padding: '1px 5px',
+								'background-color': '#666'
+							}).appendTo("body").fadeIn(1000);
+						}
+	
+
+						var previousPoint = null;
+							$("#reportd").bind("plothover", function (event, pos, item) {
+								if (item) {
+									if (previousPoint != item.dataIndex) {
+										previousPoint = item.dataIndex;
+
+										$("#tooltip").remove();
+										var x = item.datapoint[0].toFixed(0),
+											y = item.datapoint[1].toFixed(0);
+
+										showTooltip(item.pageX, item.pageY, y);
+									}
+								}
+								else {
+									$("#tooltip").fadeOut(800);
+									previousPoint = null;
+								}
+							});	
+						}
+					});
+	
+				}
+
+			getSalesChart($('#ranged').val());
+
+		//--></script> 
+
+
+		<script type="text/javascript"><!--
+		function getSalesChart(range) {
+			$.ajax({
+				type: 'get',
+				url: 'index.php?route=common/home/chart&token=<?php echo $token; ?>&range=' + range,
+				dataType: 'json',
+				async: false,
+				success: function(json) {
+				
+					var plot = $.plot("#reportw", [json.order, json.customer],
+					{
+						series: {
+							lines: {
+								show: true,
+								fill: true,
+								lineWidth: 1
+							},
+							points: {
+								show: true
+							}
+						},
+						grid: {
+							borderWidth: 0,
+							hoverable: true,
+							clickable: true,
+							backgroundColor: '#FFF'
+						},	
+						xaxis: {
+							ticks: json.xaxis
+						}
+					});
+					
+					
+					
+
+					
+					function showTooltip(x, y, contents) {
+				$('<div id="tooltip">' + contents + '</div>').css({
+					position: 'absolute',
+					display: 'none',
+					top: y - 25,
+					left: x + 5,
+					color: '#FFF',
+					border: '1px solid #333',
+					padding: '1px 5px',
+					'background-color': '#666'
+				}).appendTo("body").fadeIn(1000);
+			}
+	
+
+			var previousPoint = null;
+				$("#reportw").bind("plothover", function (event, pos, item) {
+					if (item) {
+						if (previousPoint != item.dataIndex) {
+							previousPoint = item.dataIndex;
+
+							$("#tooltip").remove();
+							var x = item.datapoint[0].toFixed(0),
+								y = item.datapoint[1].toFixed(0);
+
+							showTooltip(item.pageX, item.pageY, y);
+						}
+					}
+					else {
+						$("#tooltip").fadeOut(800);
+						previousPoint = null;
+					}
+					});	
+				}
+			});
+		}
+
+	getSalesChart($('#rangew').val());
+
+	//--></script> 
+
+
+
+	<script type="text/javascript"><!--
+	function getSalesChart(range) {
+		$.ajax({
+			type: 'get',
+			url: 'index.php?route=common/home/chart&token=<?php echo $token; ?>&range=' + range,
+			dataType: 'json',
+			async: false,
+			success: function(json) {
+			
+				var plot = $.plot("#reportm", [json.order, json.customer],
+				{
+					series: {
+						lines: {
+							show: true,
+							fill: true,
+							lineWidth: 1
+						},
+						points: {
+							show: true
+						}
+					},
+					grid: {
+						borderWidth: 0,
+						hoverable: true,
+						clickable: true,
+						backgroundColor: '#FFF'
+					},	
+					xaxis: {
+						ticks: json.xaxis
+					}
+				});
+				
+			
+				function showTooltip(x, y, contents) {
+					$('<div id="tooltip">' + contents + '</div>').css({
+						position: 'absolute',
+						display: 'none',
+						top: y - 25,
+						left: x + 5,
+						color: '#FFF',
+						border: '1px solid #333',
+						padding: '1px 5px',
+						'background-color': '#666'
+					}).appendTo("body").fadeIn(1000);
+				}
+	
+
+				var previousPoint = null;
+					$("#reportm").bind("plothover", function (event, pos, item) {
+						if (item) {
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+
+								$("#tooltip").remove();
+								var x = item.datapoint[0].toFixed(0),
+									y = item.datapoint[1].toFixed(0);
+
+								showTooltip(item.pageX, item.pageY, y);
+							}
+						}
+						else {
+							$("#tooltip").fadeOut(800);
+							previousPoint = null;
+						}
+					});	
+				}
+			});
+		}
+
+		getSalesChart($('#rangem').val());
+
+		//--></script> 
+		]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="before"><![CDATA[backgroundColor: '#FFFFFF']]></search>
+            <add><![CDATA[borderWidth: 0,]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="before"><![CDATA[grid: {]]></search>
+            <add><![CDATA[colors: ["#81a8d2", "#bb9d9c"],]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace" offset="35"><![CDATA[<script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.js"></script> ]]></search>
+            <add><![CDATA[
+			<script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.js"></script> 
+			<script type="text/javascript"><!--
+			function getSalesChart(range) {
+				$.ajax({
+					type: 'get',
+					url: 'index.php?route=common/home/chart&token=<?php echo $token; ?>&range=' + range,
+					dataType: 'json',
+					async: false,
+					success: function(json) {
+					
+						var plot = $.plot("#report", [json.order, json.customer],
+						{
+							series: {
+								lines: {
+									show: true,
+									fill: true,
+									lineWidth: 1
+								},
+								points: {
+									show: true
+								}
+							},
+							colors: ["#81a8d2", "#bb9d9c"],
+							grid: {
+								borderWidth: 0,
+								hoverable: true,
+								clickable: true,
+								backgroundColor: '#FFF'
+							},	
+							xaxis: {
+								ticks: json.xaxis
+							}
+						});
+						
+						
+						
+
+						
+						function showTooltip(x, y, contents) {
+					$('<div id="tooltip">' + contents + '</div>').css({
+						position: 'absolute',
+						display: 'none',
+						top: y - 25,
+						left: x + 5,
+						color: '#FFF',
+						border: '1px solid #333',
+						padding: '1px 5px',
+						'background-color': '#666'
+					}).appendTo("body").fadeIn(1000);
+				}
+	
+			var previousPoint = null;
+				$("#report").bind("plothover", function (event, pos, item) {
+					if (item) {
+						if (previousPoint != item.dataIndex) {
+							previousPoint = item.dataIndex;
+
+							$("#tooltip").remove();
+							var x = item.datapoint[0].toFixed(0),
+								y = item.datapoint[1].toFixed(0);
+
+							showTooltip(item.pageX, item.pageY, y);
+						}
+					}
+					else {
+						$("#tooltip").fadeOut(800);
+						previousPoint = null;
+					}
+				});	
+			}
+		});
+	}
+
+	getSalesChart($('#range').val());
+
+	//--></script> 
+	]]></add>
+        </operation>	
+	</file>
+	
+
+	<!-- Category List with Thumbnails -->
+	<file name="admin/controller/catalog/category.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$action = array();]]></search>
+			<add><![CDATA[$this->load->model('tool/image');
+                        $cat_img_query = $this->db->query("SELECT image FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$result['category_id'] . "'");
+                        foreach ($cat_img_query->rows as $query) { 
+                                 $image = $query['image']; 
+                        }
+                        if (!empty($image) && $image && file_exists(DIR_IMAGE . $image)) {
+						$thumb = $this->model_tool_image->resize($image, 120, 120);
+						} else {
+						$thumb = $this->model_tool_image->resize('no_image.jpg', 40, 40);
+			}]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['categories'][] = array(]]></search>
+			<add><![CDATA['image' => $thumb,]]></add>
+		</operation>	
+		<operation>
+			<search position="before"><![CDATA[$this->data['column_name'] = $this->language->get('column_name');]]></search>
+			<add><![CDATA[$this->data['column_image'] = $this->language->get('column_image');]]></add>
+		</operation>	
+	</file>
+	
+	<file name="admin/view/template/catalog/category_list.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<td class="left"><?php echo $column_name; ?></td>]]></search>
+			<add><![CDATA[<td class="center"><?php echo $column_image; ?></td>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[<td class="left"><?php echo $category['name']; ?></td>]]></search>
+			<add><![CDATA[<td class="center"><img src="<?php echo $category['image']; ?>" alt="<?php echo $category['name']; ?>" title="<?php echo $category['name']; ?>" style="padding: 1px; border: 1px solid #DDDDDD;" /></td>]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/catalog/category.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[$_['column_image'] = 'Image';]]></add>
+		</operation>
+	</file>
+	
+	<!-- Icons for Titles -->
+	<file name="admin/view/template/*/*.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<h1><img src="view/image/]]></search>
+			<add><![CDATA[<h1><img src="view/image/flat-image/]]></add>
+		</operation>
+	</file>
+	
+	<!-- Icons for Navigation and Lock -->
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<div class="div3"><img src="view/image/lock.png"]]></search>
+			<add><![CDATA[<div class="div3"><img src="view/image/flat-image/lock.png"]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="dashboard"><a href="<?php echo $home; ?>" class="top">]]></search>
+			<add><![CDATA[<li id="dashboard"><a href="<?php echo $home; ?>" class="top"><img src="view/image/flat-image/dashboard-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="catalog"><a class="top">]]></search>
+			<add><![CDATA[<li id="catalog"><a class="top"><img src="view/image/flat-image/catalog-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="extension"><a class="top">]]></search>
+			<add><![CDATA[<li id="extension"><a class="top"><img src="view/image/flat-image/extension-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="sale"><a class="top">]]></search>
+			<add><![CDATA[<li id="sale"><a class="top"><img src="view/image/flat-image/sale-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="system"><a class="top">]]></search>
+			<add><![CDATA[<li id="system"><a class="top"><img src="view/image/flat-image/system-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="reports"><a class="top">]]></search>
+			<add><![CDATA[<li id="reports"><a class="top"><img src="view/image/flat-image/report-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="help"><a class="top">]]></search>
+			<add><![CDATA[<li id="help"><a class="top"><img src="view/image/flat-image/help-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li id="store"><a href="<?php echo $store; ?>" target="_blank" class="top">]]></search>
+			<add><![CDATA[<li id="store"><a href="<?php echo $store; ?>" target="_blank" class="top"><img src="view/image/flat-image/store-menu.png" alt="" />]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<li><a class="top" href="<?php echo $logout; ?>">]]></search>
+			<add><![CDATA[<li><a class="top" href="<?php echo $logout; ?>"><img src="view/image/flat-image/logout-menu.png" alt="" />]]></add>
+		</operation>
+	</file>
+	
+	
+	<!-- Copyright + Buttons -->
+	<file name="admin/view/template/common/footer.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<div id="footer"><?php echo $text_footer; ?></div>]]></search>
+			<add><![CDATA[
+			<div id="footer">
+				<div id="copyright">
+				<img src="view/image/flat-image/themebooster.png" alt="" />
+				<p>Thank You for using Flat Admin</p>
+				<ul>
+				<li><a id="ask-support" target="_blank" href="http://support.themebooster.com">Ask for Support</a></li>
+				<li><a id="see-products" target="_blank" href="http://www.themebooster.com">See Our Products</a></li>
+				<li><a id="upgrade" title="Upgrade to Responsive Flat Admin" target="_blank" href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=18685">Upgrade to Responsive Flat Admin</a></li>
+				</ul>
+				</div>
+			<?php echo $text_footer; ?>
+			</div>
+			]]></add>
+		</operation>
+	</file>
+	
+	<!-- Internet Explorer -->
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<script type="text/javascript" src="view/javascript/jquery/jquery-1.7.1.min.js"></script>]]></search>
+			<add><![CDATA[
+			<!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="view/stylesheet/flat-stylesheet-ie.css" />
+			<![endif]-->
+
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

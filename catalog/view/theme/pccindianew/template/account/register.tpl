@@ -177,7 +177,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="postcode"><?php echo $entry_postcode; ?><span id="postcode-required" class="required">*</span></label>
-                                    <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
+                                    <input type="text" name="postcode" value="<?php echo $postcode; ?>" id="shipping-address-postcode"/>
                                     <?php if ($error_postcode) { ?>
                                     <span class="error"><?php echo $error_postcode; ?></span>
                                     <?php } ?>
@@ -358,7 +358,7 @@
                                     <input type="checkbox" name="agree" value="1" />
                                     <?php } ?>
 
-                                    <input type="submit" value="<?php echo $button_continue; ?>" class="btn" />
+                                    <input type="submit" value="<?php echo $button_continue; ?>" class="btn" id="continue_btn" />
                                 </div>
                                 <?php } else { ?>
                                 <div class="col-md-8">
@@ -508,6 +508,51 @@ $('input[name=\'customer_group_id\']:checked').live('change', function() {
     });
 
     $('select[name=\'country_id\']').trigger('change');
+    
+    $('#shipping-address-postcode').bind('blur', function() {
+	if (this.value == '') return;
+	$.ajax({
+		url: 'index.php?route=checkout/checkout/pincode&code=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+                    
+                    $('.warning, .error').remove();
+                    $('#continue_btn').hide();
+			$('#shipping-address-postcode').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+                        
+		},			
+		success: function(json) {
+			if (json['status'] == '1') {
+				
+                             $('#continue_btn').show();
+			} else {
+				BootstrapDialog.show({
+                                title: 'Oops! Sorry, we are currently unable to deliver in your area',
+                                message: 'Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted',
+                                buttons: [{
+                                    id: 'btn-ok',   
+                                    label: 'OK',
+                                    cssClass: 'btn-primary', 
+                                    autospin: false,
+                                    action: function(dialogRef){    
+                                        dialogRef.close();
+                                    }
+                                }]
+                            });
+                            $('#shipping-address-postcode').val('');
+                             $('#continue_btn').show();
+			}
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+    
 //--></script> 
 <script type="text/javascript"><!--
     $(document).ready(function() {

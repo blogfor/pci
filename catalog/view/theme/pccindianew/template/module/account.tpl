@@ -1,7 +1,9 @@
 <div class="widget widget__collections">
+ <div class="accounts_heading">
   <h3 class="widget_header"><?php echo $heading_title; ?></h3>
+  </div>
   <div class="widget_content">
-    <ul class="list">
+    <ul class="list accounts_list">
       <?php if (!$logged) { ?>
       <li><a href="<?php echo $login; ?>"><?php echo $text_login; ?></a> / <a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
       <li><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></li>

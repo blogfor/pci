@@ -40,9 +40,24 @@
         <td colspan="4" class="price"><b><?php echo $total['title']; ?>:</b></td>
         <td class="total"><?php echo $total['text']; ?></td>
       </tr>
-      <?php } ?>
+      <?php 
+      $amountNet=$total['text'];
+      } ?>
     </tfoot>
   </table>
+    <div>
+        <?php 
+        $amountNet=str_replace("Rs. ","",$amountNet);
+        $amountNet=str_replace(" ","",$amountNet);
+        $amountNet=str_replace(",","",$amountNet);
+        $amountNet=(int)$amountNet;
+        if($amountNet>200000)
+        {
+        echo '<strong>PAN:</strong> &nbsp; <input type="text" name="pan" id="pan" value="" onblur="ValidatePAN(this);" maxlength="10"/>';
+        echo '<p>You need to enter your valid PAN information for more than Rs.2,00,000/- transaction.</p>';
+        }
+        ?>
+    </div>
 </div>
 <div class="payment"><?php echo $payment; ?></div>
 <?php } else { ?>

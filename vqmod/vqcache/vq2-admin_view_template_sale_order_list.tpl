@@ -1,18 +1,5 @@
 <?php echo $header; ?>
-<?php require_once(DIR_CONFIG.'wsdl.class.php');?>
-<?php
 
-$wsdlOBJ = new wsdl_call_base();
-$params = array(
-         'strMapCode' => "PCCGEM",
-          'strDocs' => "0507839243",
-          'strTrackType'=>"D",	
-);
-
-$ChannelNames = $wsdlOBJ->wsdl_return_val("TrackDoc",$params);
-$arrayChannel = array();
-var_dump($ChannelNames);
-?>
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -27,12 +14,12 @@ var_dump($ChannelNames);
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('form').attr('action', '<?php echo $export; ?>'); $('form').submit();" class="button"><?php echo $button_export; ?></a><a onclick="$('#form').attr('action', '<?php echo $invoice; ?>'); $('#form').attr('target', '_blank'); $('#form').submit();" class="button"><?php echo $button_invoice; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $delete; ?>'); $('#form').attr('target', '_self'); $('#form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <h1><img src="view/image/flat-image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
+      <div class="buttons"><a onclick="$('#form').attr('action', '<?php echo $invoice; ?>'); $('#form').attr('target', '_blank'); $('#form').submit();" class="button invoice"><?php echo $button_invoice; ?></a><a href="<?php echo $insert; ?>" class="button insert"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $delete; ?>'); $('#form').attr('target', '_self'); $('#form').submit();" class="button delete"><?php echo $button_delete; ?></a></div>
     </div>
     <div class="content">
       <form action="" method="post" enctype="multipart/form-data" id="form">
-        <table class="list">
+        <table class="list" id="order-list">
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
@@ -56,6 +43,8 @@ var_dump($ChannelNames);
                 <?php } else { ?>
                 <a href="<?php echo $sort_total; ?>"><?php echo $column_total; ?></a>
                 <?php } ?></td>
+                <td class="right">Payment Status</td>
+                
               <td class="left"><?php if ($sort == 'o.date_added') { ?>
                 <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
                 <?php } else { ?>
@@ -91,6 +80,7 @@ var_dump($ChannelNames);
                   <?php } ?>
                 </select></td>
               <td align="right"><input type="text" name="filter_total" value="<?php echo $filter_total; ?>" size="4" style="text-align: right;" /></td>
+              <td align="right"></td>
               <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" class="date" /></td>
               <td><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" size="12" class="date" /></td>
               <td align="right"></td>
@@ -108,6 +98,17 @@ var_dump($ChannelNames);
               <td class="left"><?php echo $order['customer']; ?></td>
               <td class="left"><?php echo $order['status']; ?></td>
               <td class="right"><?php echo $order['total']; ?></td>
+              <td class="right">
+                   <?php if($order['response_text']!=''){
+                   
+                   $resposnse_text=base64_decode(unserialize($order['response_text']));
+                   if($resposnse_text['txnResponseCode']==0)
+                   echo 'PAYMENT SUCCESSFUL';
+                   else
+                   echo 'PAYMENT CANCEL';
+                   }                   
+                   ?></td>
+                   
               <td class="left"><?php echo $order['date_added']; ?></td>
               <td class="left"><?php echo $order['date_modified']; ?></td>
                <td class="right">
@@ -118,7 +119,7 @@ var_dump($ChannelNames);
                    }                   
                    ?></td>
               <td class="right"><?php foreach ($order['action'] as $action) { ?>
-                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                <a class="action-link" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>

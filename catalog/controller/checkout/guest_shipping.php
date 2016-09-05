@@ -142,7 +142,23 @@ class ControllerCheckoutGuestShipping extends Controller {
 			
 			if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
 				$json['error']['zone'] = $this->language->get('error_zone');
-			}	
+			}
+                          
+                        if ($this->request->post['postcode']=='' || $this->request->post['postcode']!='') {
+                          
+                            
+                            $this->load->model('localisation/country');
+
+                        $validate = $this->model_localisation_country->validate($this->request->post['postcode']);
+
+                                if ($validate['CNT']<=0) {
+                                        $json['error']['postcodeout']="Sorry, we are currently unable to deliver in your area, inconvenience caused deeply regretted.";
+                                }
+                
+				
+                                
+			}
+                        
 		}
 		
 		if (!$json) {

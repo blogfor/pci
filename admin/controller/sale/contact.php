@@ -3,7 +3,7 @@ class ControllerSaleContact extends Controller {
 	private $error = array();
 	 
 	public function index() {
-		$this->language->load('sale/contact');
+		$this->load->language('sale/contact');
  
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -66,7 +66,7 @@ class ControllerSaleContact extends Controller {
 	}
 	
 	public function send() {
-		$this->language->load('sale/contact');
+		$this->load->language('sale/contact');
 		
 		$json = array();
 		
@@ -127,6 +127,16 @@ class ControllerSaleContact extends Controller {
 						foreach ($results as $result) {
 							$emails[] = $result['email'];
 						}
+						
+						// Newsletter subscribers
+					$results = $this->model_sale_customer->getNewsletterSubscribers();
+					    
+						foreach ($results as $result) {
+							$emails["s".$result['id']] = $result['email_id'];
+						}
+ 				   // Newsletter subscribers only
+						
+						
 						break;
 					case 'customer_all':
 						$customer_data = array(
@@ -144,7 +154,7 @@ class ControllerSaleContact extends Controller {
 						break;
 					case 'customer_group':
 						$customer_data = array(
-							'filter_customer_group_id' => $this->request->post['customer_group_id'],
+							'filter_customer_group_id' => $this->request->post['filter_customer_group_id'],
 							'start'                    => ($page - 1) * 10,
 							'limit'                    => 10
 						);
@@ -195,7 +205,7 @@ class ControllerSaleContact extends Controller {
 						break;											
 					case 'product':
 						if (isset($this->request->post['product'])) {
-							$email_total = $this->model_sale_order->getTotalEmailsByProductsOrdered($this->request->post['product']);	
+							$email_total = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product']);	
 							
 							$results = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product'], ($page - 1) * 10, 10);
 													
@@ -217,7 +227,7 @@ class ControllerSaleContact extends Controller {
 					}				
 						
 					if ($end < $email_total) {
-						$json['next'] = str_replace('&amp;', '&', $this->url->link('sale/contact/send', 'token=' . $this->session->data['token'] . '&page=' . ($page + 1), 'SSL'));
+						$json['next'] = str_replace('&amp;', '&', $this->url->link('sale/contact/send', 'token=' . $this->session->data['token'] . '&page=' . ($page + 1)));
 					} else {
 						$json['next'] = '';
 					}
@@ -243,6 +253,7 @@ class ControllerSaleContact extends Controller {
 						$mail->setFrom($this->config->get('config_email'));
 						$mail->setSender($store_name);
 						$mail->setSubject(html_entity_decode($this->request->post['subject'], ENT_QUOTES, 'UTF-8'));					
+						
 						$mail->setHtml($message);
 						$mail->send();
 					}

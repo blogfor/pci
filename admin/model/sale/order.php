@@ -483,8 +483,9 @@ class ModelSaleOrder extends Model {
 				'accept_language'         => $order_query->row['accept_language'],					
 				'date_added'              => $order_query->row['date_added'],
 				'date_modified'           => $order_query->row['date_modified'],
-                'logistics_id'            => $order_query->row['logistics_id'],
+                                'logistics_id'            => $order_query->row['logistics_id'],
 				'response_text'            => $order_query->row['response_text'],
+                                'pan'            => $order_query->row['pan'],
 			);
 		} else {
 			return false;
